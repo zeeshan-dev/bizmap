@@ -1,0 +1,19 @@
+<ion-view view-title="{{ title }}">
+ <ion-nav-buttons side="right">
+      <button class="button" ng-click="showMap()" ng-class="listView ? 'ion-location' : 'ion-navicon'">
+        <!-- <i class="icon ion-location"></i> -->
+      </button>
+    </ion-nav-buttons>
+  <ion-content>
+    <ion-list ng-show="listView">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="list in lists" type="item-text-wrap" href="#detail/{{list.place_id}}">
+        <img ng-src="{{list.icon}}">
+        <h2 class="positive">{{list.name}}</h2>
+        <p><strong>{{list.distance}}{{distanceUnit}}</strong></p>
+        <p>{{list.vicinity}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+     <div id="list-map" ng-show="!listView"></div>
+    </ion-content>
+</ion-view>

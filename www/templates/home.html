@@ -1,0 +1,75 @@
+
+<ion-view view-title="Home">
+  <ion-content class="padding">
+    
+  <!--<div class="row">
+    <div class="col">
+      <button class="button icon-left button-outline ion-briefcase button-positive" ng-click="type('business')">Businesses</button>
+    </div>
+    <div class="col"> 
+      <button class="button icon-left button-outline ion-cash button-positive" ng-click="type('bank')">Banks</button>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <button class="button icon-left button-outline ion-android-restaurant button-positive" ng-click="type('restaurant')">Restaurants</button>
+    </div>
+    <div class="col">
+      <button class="button icon-left button-outline ion-medkit button-positive" ng-click="type('hospital')">Hospitals</button>
+    </div>
+  </div>
+  <div class="row">
+   <div class="col">
+   <a href="#/tab/dash">Link</a>
+    {{ location.lat }}, {{ location.lng }}
+    </div>
+    <div class="col">
+      {{ error }}
+    </div>
+  </div>-->
+  <div class="list card">
+
+  <a href="#" class="item item-icon-left" ng-click="type('business')">
+    <i class="icon ion-briefcase"></i>
+    Businesses
+  </a>
+
+  <a href="#" class="item item-icon-left" ng-click="type('bank')">
+    <i class="icon ion-cash"></i>
+    Banks
+  </a>
+
+  <a href="#" class="item item-icon-left" ng-click="type('restaurant')">
+    <i class="icon ion-android-restaurant"></i>
+    Restaurants
+  </a>
+
+  <a href="#" class="item item-icon-left" ng-click="type('hospital')">
+    <i class="icon ion-medkit"></i>
+    Hospitals
+  </a>
+  <a href="#" class="item item-icon-left" ng-click="type('hospital')">
+    <i class="icon ion-location"></i>
+    {{ location.lat }}, {{ location.lng }}
+  </a>
+
+</div>
+  <ion-list>
+        <div ng-repeat="group in groups">
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(group)"
+                    ng-class="{active: isGroupShown(group)}">
+              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            Group {{group.name}}
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-repeat="item in group.items"
+                    ng-show="isGroupShown(group)">
+            {{item}}
+          </ion-item>
+        </div>
+      </ion-list>
+  </ion-content>
+</ion-view>
