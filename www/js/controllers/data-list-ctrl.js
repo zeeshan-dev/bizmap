@@ -7,7 +7,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
   $scope.title = $scope.type.charAt(0).toUpperCase() + $scope.type.slice(1);
 	$scope.location = $localstorage.getObject('location');
 	$scope.lists = [];
-  $scope.listView =  true;
+  $scope.listView =  false;
   $scope.distanceUnit = ' km';
 	var myObj = $scope;
 	
@@ -44,7 +44,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
 
     if (status === google.maps.places.PlacesServiceStatus.OK) {
     	
-    	myObj.$apply(function(){
+    	//myObj.$apply(function(){
           for (var i = 0; i < results.length; i++) {
             results[i].distance = Utility.calculateDistance(results[i], myObj.location);
             createMarker(results[i]);
@@ -57,7 +57,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
           
           // sort list by distance
     		  myObj.lists = Utility.sortListByDistance(results);
-    	});
+    	//});
     	
       
     }
@@ -66,6 +66,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
     Loading.hide();
   }
   function createMarker(place) {
+
     var placeLoc = place.geometry.location;
     var marker = new google.maps.Marker({
       map: map,
@@ -77,7 +78,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
     
     google.maps.event.addListener(marker, 'mousedown', function() {
 
-      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+      infowindow.setContent('<div><a href="#detail/'+place.place_id+'"><strong>' + place.name + '</strong></a><br>' +
             place.vicinity + '</div>');
       infowindow.open(map, this);
     });

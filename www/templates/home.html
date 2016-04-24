@@ -1,7 +1,20 @@
 
-<ion-view view-title="Home">
+<ion-view view-title="Home" class="view-custom">
+
   <ion-content class="padding">
-    
+  <section id="grow-business" class="marketing">
+    <div class="container">
+      <header>BM helps businesses grow.</header>
+    </div></div>
+  </section>
+  <div class="card" style="margin-top:-65px !important;">
+  <div class="list list-inset">
+  <label class="item item-input">
+    <input type="text" placeholder="Search">
+  </label>
+</div>
+</div>
+    <!-- <img class="cover-img" src="../img/growth.jpg"/> -->
   <!--<div class="row">
     <div class="col">
       <button class="button icon-left button-outline ion-briefcase button-positive" ng-click="type('business')">Businesses</button>
@@ -28,7 +41,56 @@
       {{ error }}
     </div>
   </div>-->
-  <div class="list card">
+
+ 
+
+   <div class="row" >
+            <div class="col-33">
+            <div class="card home-card">
+                <div>
+                <a href="#" class="dasbhoard-buttons">
+                  <div class="appAdminCircle">
+                    <i class="icon ion-icecream icon-design icon-design"></i>
+                    <!-- <button class="button button-fab button-balanced icon ion-leaf activated"></button> -->
+                  </div>
+                  <div class="appAdminLink">Ice Cream</div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-33">
+             <div class="card home-card">
+                <div>
+                  <a href="#" class="dasbhoard-buttons">
+                  <div class="appAdminCircle"><i class="icon ion-android-restaurant icon-design1"></i><!-- <button class="button button-fab button-assertive icon zmdi zmdi-pizza"></button> --></div>
+                  <div class="appAdminLink">Restaurants</div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-33">
+              <div class="card home-card">
+                <div>
+                <a href="#" class="dasbhoard-buttons">
+                  <div class="appAdminCircle"><i class="icon ion-pizza icon-design2"></i><!-- <button class="button button-fab ink-dark button-calm icon ion-tshirt"></button> --></div>
+                  <div class="appAdminLink">Pizza</div>
+                  </a>
+                </div>
+              </div>
+            
+            </div>
+           <!--  <div class="col-33">
+              <div class="card home-card">
+                <div class="item item-text-wrap">
+                    <div class="appAdminCircle"><button class="button button-fab button-dark icon ion-heart" data-ink-color="#ff0000" data-ink- opacity=".8"></button></div>
+                  <div class="appAdminLink">Cake</div>
+                </div>
+              </div>
+              </div>  -->
+            </div>
+ <div class="list card">
 
   <a href="#" class="item item-icon-left" ng-click="type('business')">
     <i class="icon ion-briefcase"></i>
@@ -55,21 +117,61 @@
   </a>
 
 </div>
-  <ion-list>
+  <ion-list class="card">
         <div ng-repeat="group in groups">
           <ion-item class="item-stable"
                     ng-click="toggleGroup(group)"
                     ng-class="{active: isGroupShown(group)}">
               <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
             &nbsp;
-            Group {{group.name}}
+            {{group.name}}
           </ion-item>
           <ion-item class="item-accordion"
                     ng-repeat="item in group.items"
                     ng-show="isGroupShown(group)">
-            {{item}}
+            <div class="row">
+            <div class="col-33">
+            <div class="card home-card">
+                <div>
+                <a href="#" class="dasbhoard-buttons">
+                  <div class="appAdminCircle">
+                    <i class="icon ion-icecream icon-design icon-design"></i>
+          
+                  </div>
+                  <div class="appAdminLink">Ice Cream</div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-33">
+             <div class="card home-card">
+                <div>
+                  <a href="#" class="dasbhoard-buttons">
+                  <div class="appAdminCircle"><i class="icon ion-android-restaurant icon-design1"></i></div>
+                  <div class="appAdminLink">Restaurants</div>
+                  </a>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-33">
+              <div class="card home-card">
+                <div>
+                <a href="#" class="dasbhoard-buttons">
+                  <div class="appAdminCircle"><i class="icon ion-pizza icon-design2"></i></div>
+                  <div class="appAdminLink">Pizza</div>
+                  </a>
+                </div>
+              </div>
+            
+            </div>
+         
+            </div>
           </ion-item>
         </div>
-      </ion-list>
+      </ion-list> 
+
+
   </ion-content>
 </ion-view>

@@ -88,13 +88,32 @@ angular.module('starter.controllers', [])
     $state.go('list', {type:type});
    }
 
+ /* $scope.groups = [{
+    name: "Restaurants",
+    items: []
+  },
+  {
+    name: "Businesses",
+    items: []    
+
+  },
+  {
+    name: "Hospitals",
+    items: []
+  },
+
+  {
+    name: "Banks"
+    items: []
+  }];*/
+  var titleList = ["Food and Beverage", "Hospitals", "Banks"]
   $scope.groups = [];
-  for (var i=0; i<5; i++) {
+  for (var i=0; i<3; i++) {
     $scope.groups[i] = {
-      name: i,
+      name: titleList[i],
       items: []
     };
-    for (var j=0; j<3; j++) {
+    for (var j=0; j<1; j++) {
       $scope.groups[i].items.push(i + '-' + j);
     }
   }
