@@ -1,0 +1,27 @@
+
+<div  layout="column" layout-padding ng-cloak>
+  <br/>
+  <md-content class="autoScroll">
+    <md-input-container class="md-icon-float md-block">
+      <!-- Use floating label instead of placeholder -->
+   
+      <md-icon md-svg-icon="person" ></md-icon>
+      <input ng-model="user.name" type="text" placeholder="Title">
+    </md-input-container>
+    <md-input-container md-no-float class="md-block">
+      <md-icon md-svg-icon="contact"></md-icon>
+      <input ng-model="user.phone" type="text" placeholder="Phone Number">
+    </md-input-container>
+    <md-input-container class="md-block">
+      <!-- Use floating placeholder instead of label -->
+      <md-icon md-svg-icon="email" class="email"></md-icon>
+      <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+    </md-input-container>
+    <md-input-container md-no-float class="md-block">
+      <md-icon md-svg-icon="location" style="display:inline-block;"></md-icon>
+      <input ng-model="user.address" type="text" placeholder="Address" >
+    </md-input-container>
+   
+  </md-content>
+</div>
+
