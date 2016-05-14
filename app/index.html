@@ -14,14 +14,28 @@
   </head>
 
   <body ng-app="bizzmap" layout="column" >
-  <md-toolbar layout="row">
+<!--   <md-toolbar layout="row">
 
       <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
         <md-icon md-svg-icon="menu" ></md-icon>
       </md-button>
       <h1>Bizz Map</h1>
 
-  </md-toolbar>
+  </md-toolbar> -->
+  <div ng-controller="MainCtrl" ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Bizz Map</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-raised" aria-label="Learn More" ng-click="addBusiness()">
+          Add Business
+        </md-button>
+      
+      </div>
+    </md-toolbar>
+   </div>
 
     <div ui-view autoscroll="true"></div>
     
@@ -61,7 +75,9 @@
     <script src="./src/users/UserController.js"></script>
     <script src="./src/users/UserService.js"></script>
     <script src="app.js"></script>
+    <script src="admin/controllers/main-ctrl.js"></script>
     <script src="admin/controllers/add-business-ctrl.js"></script>
+    <script src="admin/models/categories.js"></script>
     <script type="text/javascript">
 
       

@@ -1,5 +1,5 @@
-app.controller('AddBusinessCtrl', ['$scope' , '$state',
-    function($scope, $state) {
+app.controller('AddBusinessCtrl', ['$scope' , '$state', 'Categories',
+    function($scope, $state, Categories) {
 
   $scope.user = {
       name: '',
@@ -10,13 +10,22 @@ app.controller('AddBusinessCtrl', ['$scope' , '$state',
       state: '',
       postalCode: ''
     };
-    $scope.states = ('Balochistan KPK Punjab Sindh Gilgit–Baltistan').split(' ').map(function(state) {
+  
+  $scope.states = ('Balochistan KPK Punjab Sindh Gilgit–Baltistan').split(' ').map(function(state) {
         return {abbrev: state};
-      });
+  });
     
- 	$scope.submit = function submit() {
+  $scope.submit = function submit() {
 
- 		console.log('Inside submit');
- 	};
+    console.log('Inside submit');
+  };
+
+  $scope.categories = Categories;
+  $scope.selectedMain = function selectedMain(value){
+
+    $scope.subcategories = JSON.parse($scope.selectedMainCategory);
+    $scope.user.mainCategory = $scope.subcategories.name;    
+  };
+  //http://www.bruneiyellowpages.net/business_category_list.pdf
 
 }]);

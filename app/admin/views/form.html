@@ -1,27 +1,27 @@
+<div ng-controller="TypeaheadCtrl as ctrl" layout="column" ng-cloak>
+  <md-content class="md-padding">
+  
+      <p>Use <code>md-autocomplete</code> to search for matches from local or remote data sources.</p>
+      <md-autocomplete
+          ng-disabled="ctrl.isDisabled"
+          md-no-cache="ctrl.noCache"
+          md-selected-item="ctrl.selectedItem"
+          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+          md-search-text="ctrl.searchText"
+          md-selected-item-change="ctrl.selectedItemChange(item)"
+          md-items="item in ctrl.querySearch(ctrl.searchText)"
+          md-item-text="item.display"
+          md-min-length="0"
+          placeholder="What is your favorite US state?">
+        <md-item-template>
+          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+        </md-item-template>
+        <md-not-found>
+          No categories matching "{{ctrl.searchText}}" were found.
+          <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+        </md-not-found>
+      </md-autocomplete>
 
-<div  layout="column" layout-padding ng-cloak>
-  <br/>
-  <md-content class="autoScroll">
-    <md-input-container class="md-icon-float md-block">
-      <!-- Use floating label instead of placeholder -->
-   
-      <md-icon md-svg-icon="person" ></md-icon>
-      <input ng-model="user.name" type="text" placeholder="Title">
-    </md-input-container>
-    <md-input-container md-no-float class="md-block">
-      <md-icon md-svg-icon="contact"></md-icon>
-      <input ng-model="user.phone" type="text" placeholder="Phone Number">
-    </md-input-container>
-    <md-input-container class="md-block">
-      <!-- Use floating placeholder instead of label -->
-      <md-icon md-svg-icon="email" class="email"></md-icon>
-      <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
-    </md-input-container>
-    <md-input-container md-no-float class="md-block">
-      <md-icon md-svg-icon="location" style="display:inline-block;"></md-icon>
-      <input ng-model="user.address" type="text" placeholder="Address" >
-    </md-input-container>
-   
+    
   </md-content>
 </div>
-
