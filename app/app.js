@@ -4,7 +4,8 @@
   .module('bizzmap', [
     'ngMaterial', 
     'users', 
-    'ui.router'
+    'ui.router',
+    'lfNgMdFileInput'
 ])
   .config(['$mdThemingProvider', '$mdIconProvider', '$stateProvider', '$urlRouterProvider',
     function($mdThemingProvider, $mdIconProvider, $stateProvider, $urlRouterProvider){

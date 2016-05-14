@@ -1,5 +1,5 @@
-app.controller('AddBusinessCtrl', ['$scope' , '$state', 'Categories',
-    function($scope, $state, Categories) {
+app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories',
+    function($scope, $state, $http, Categories) {
 
   $scope.user = {
       name: '',
@@ -15,11 +15,6 @@ app.controller('AddBusinessCtrl', ['$scope' , '$state', 'Categories',
         return {abbrev: state};
   });
     
-  $scope.submit = function submit() {
-
-    console.log('Inside submit');
-  };
-
   $scope.categories = Categories;
   $scope.selectedMain = function selectedMain(value){
 
@@ -27,5 +22,25 @@ app.controller('AddBusinessCtrl', ['$scope' , '$state', 'Categories',
     $scope.user.mainCategory = $scope.subcategories.name;    
   };
   //http://www.bruneiyellowpages.net/business_category_list.pdf
+
+  $scope.submit = function submit() {
+
+    var formData = new FormData();
+    formData.append('logo', $scope.businessLogo);
+
+    angular.forEach($scope.user,function(key, value){
+        formData.append(key, value);
+    });
+
+    $http.post('./upload', formData, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+    }).then(function(result){
+        // do sometingh                   
+    },function(err){
+        // do sometingh
+    });
+    
+  };
 
 }]);

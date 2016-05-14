@@ -72,6 +72,9 @@
             <md-input-container class="md-block">
               <md-icon md-svg-icon="location" class="default-icon"></md-icon>
               <input required ng-model="user.address" placeholder="Address" >
+              <div ng-messages="businessForm.address.$error">
+                  <div ng-message="required">This is required.</div>
+                </div>
             </md-input-container>
             <div layout-gt-sm="row">
               <md-input-container class="md-block" flex-gt-sm>
@@ -104,6 +107,11 @@
                 <textarea ng-model="user.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
               </md-input-container>
             </div>
+            <lf-ng-md-file-input lf-files="businessLogo" name="businessLogo" lf-browse-label="Upload" lf-required lf-placeholder="Business Logo" lf-remove-label="Delete" lf-drag-and-drop-label="Drag and Drop Your Business Logo here!" drag preview></lf-ng-md-file-input>
+            <div ng-messages="businessForm.businessLogo.$error" style="color:red;">
+                  <div ng-message="required">This is required.</div>
+                </div>
+    
             <md-button ng-disabled="businessForm.$invalid" type="submit" class="md-raised md-primary">Save</md-button>
           </form>
     </div>
