@@ -1,0 +1,29 @@
+{
+  "name": "Bizmap-Api",
+  "description": "Bizmap API",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "connect-multiparty": "1.2.5",
+    "crypto": "0.0.3",
+    "express": "3.4.0",
+    "mysql": "2.10.2",
+    "nodemailer": "0.5.13",
+    "passport": "0.1.17",
+    "passport-facebook": "1.0.1",
+    "passport-google-oauth": "0.2.0",
+    "passport-http": "0.2.2",
+    "passport-local": "0.1.6",
+    "uglify-js": "2.4.0",
+    "uglifycss": "0.0.7",
+    "underscore": "1.5.2",
+    "winston": "0.7.2"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-apidoc": "~0.10.1",
+    "mocha": "~1.19.0",
+    "should": "~3.3.1",
+    "supertest": "~0.15.0"
+  }
+}
