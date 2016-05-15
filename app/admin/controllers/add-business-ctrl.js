@@ -1,5 +1,5 @@
-app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories',
-    function($scope, $state, $http, Categories) {
+app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories', 'Api', 'API_SERVER_URL',
+    function($scope, $state, $http, Categories, Api, API_SERVER_URL) {
 
   $scope.user = {
       name: '',
@@ -25,22 +25,48 @@ app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories',
 
   $scope.submit = function submit() {
 
-    var formData = new FormData();
-    formData.append('logo', $scope.businessLogo);
+    $scope.user = {
+      userId:'1',
+      name:'KFC',
+      mainCategory:'FOOD',
+      subCategory:'Delivery',
+      phone:'111-111-1265',
+      email:'info@kfc.com',
+      website:'www.kfc.com',
+      contactPerson:'Rashid Khan',
+      address:'Clifton, Karachi',
+      city:'Karachi',
+      state:'Sindh',
+      postalCode:'75400',
+      description:'This is food company'
+    };
 
-    angular.forEach($scope.user,function(key, value){
+    var formData = new FormData();
+
+    angular.forEach($scope.businessLogo,function(obj){
+        formData.append('logo', obj.lfFile);
+    });
+
+    angular.forEach($scope.user,function(value, key){
         formData.append(key, value);
     });
 
-    $http.post('./upload', formData, {
-        transformRequest: angular.identity,
-        headers: {'Content-Type': undefined}
-    }).then(function(result){
-        // do sometingh                   
-    },function(err){
-        // do sometingh
+    var headers = {'Content-Type': undefined};
+    var response = Api.post(API_SERVER_URL + '/business', formData, headers);
+
+    response.then(function success(data){
+
+      if (data.status === 'OK') {
+        alert(data.message);
+      }
+
+    }, function error(reason){
+
+      if (data.status === 'FAIL') {
+        alert(data.message);
+      }
     });
-    
+
   };
 
 }]);

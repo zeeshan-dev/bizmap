@@ -10,35 +10,37 @@
    *
    * @params:
    *
-   * 1- serverUrl: String
+   * 1- url: String
    * 2- data: Json object
    * 3- headers: object
    **/
-  Api.prototype.post = function(serverUrl, data, headers) {
+  Api.prototype.post = function(url, data, headers) {
 
 
     var myObj = this;
 
-    var deffered = $q.defer();
+    var deferred = $q.defer();
 
     $http({
       method: 'POST',
-      url: serverUrl + myObj.PostFormURL,
+      url: url,
       timeout: myObj.timeOut,
+      transformRequest: angular.identity,
       headers: headers,
       data: data
     }).
     success(function(data) {
-      deferred.resolve({
-        data:data
-        status: status
-      });
+      deferred.resolve(data);
     }).
     error(function(msg, code) {
 
+      if (msg === null) {
+        msg = {'STATUS':'FAIL', 'message': 'Unable to connect to api server.'};
+      }
       deferred.reject(msg);
       console.log(msg, code);
     });
+
     return deferred.promise;
   };
 
@@ -61,7 +63,7 @@
     success(function(data, status, headers, config) {
 
       deferred.resolve({
-        data:data
+        data:data,
         status: status
       });
     }).
@@ -136,6 +138,25 @@
       callback(results);
     });
   };
+
+  var dataURItoBlob = function dataURItoBlob(dataURI) {
+
+    // convert base64 to raw binary data held in a string
+    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+    var byteString = atob(dataURI.split(',')[1]);
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to an ArrayBuffer
+    var ab = new ArrayBuffer(byteString.length);
+    var dw = new DataView(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        dw.setUint8(i, byteString.charCodeAt(i));
+    }
+    // write the ArrayBuffer to a blob, and you're done
+    return new Blob([ab], {
+        type: mimeString
+    });
+  }
 
   return new Api();
 
