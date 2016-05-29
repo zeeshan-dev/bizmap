@@ -1,7 +1,7 @@
 app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories', 'Api', 'API_SERVER_URL',
     function($scope, $state, $http, Categories, Api, API_SERVER_URL) {
 
-  $scope.user = {
+  $scope.business = {
       name: '',
       email: '',
       phone: '',
@@ -9,8 +9,10 @@ app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories', 'A
       city: '',
       state: '',
       postalCode: ''
-    };
+  };
   
+  var me = $scope;
+
   $scope.states = ('Balochistan KPK Punjab Sindh Gilgit–Baltistan').split(' ').map(function(state) {
         return {abbrev: state};
   });
@@ -19,35 +21,19 @@ app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories', 'A
   $scope.selectedMain = function selectedMain(value){
 
     $scope.subcategories = JSON.parse($scope.selectedMainCategory);
-    $scope.user.mainCategory = $scope.subcategories.name;    
+    $scope.business.mainCategory = $scope.subcategories.name;    
   };
-  //http://www.bruneiyellowpages.net/business_category_list.pdf
-
+  
   $scope.submit = function submit() {
 
-    $scope.user = {
-      userId:'1',
-      name:'KFC',
-      mainCategory:'FOOD',
-      subCategory:'Delivery',
-      phone:'111-111-1265',
-      email:'info@kfc.com',
-      website:'www.kfc.com',
-      contactPerson:'Rashid Khan',
-      address:'Clifton, Karachi',
-      city:'Karachi',
-      state:'Sindh',
-      postalCode:'75400',
-      description:'This is food company'
-    };
-
+    $scope.business.userId = 1;
     var formData = new FormData();
 
     angular.forEach($scope.businessLogo,function(obj){
         formData.append('logo', obj.lfFile);
     });
 
-    angular.forEach($scope.user,function(value, key){
+    angular.forEach($scope.business,function(value, key){
         formData.append(key, value);
     });
 
@@ -57,7 +43,7 @@ app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories', 'A
     response.then(function success(data){
 
       if (data.status === 'OK') {
-        alert(data.message);
+        alert(data.message);  
       }
 
     }, function error(reason){
@@ -68,5 +54,22 @@ app.controller('AddBusinessCtrl', ['$scope', '$state', '$http', 'Categories', 'A
     });
 
   };
+
+  $scope.reset = function reset() {
+    $scope.business = {};
+    $scope.businessLogo = null;
+  };
+
+  $scope.initGoogleLocation = function initGoogleLocation() {
+
+    var places = new google.maps.places.Autocomplete(document.getElementById('address'));
+    google.maps.event.addListener(places, 'place_changed', function () {
+        var place = places.getPlace();
+        var address = place.formatted_address;
+        me.business.lat = place.geometry.location.lat();
+        me.business.lng = place.geometry.location.lng();
+    });
+       
+  }
 
 }]);
