@@ -3,8 +3,8 @@ function MySQL() {
   
 }
 
-// class methods
-MySQL.prototype.perpareInsertQuery = function(data, table) {
+// prepare insert query
+MySQL.prototype.perpareInsertQuery = function(table, data) {
   
   var query = 'INSERT INTO ' + table + ' ';
 
@@ -24,6 +24,29 @@ MySQL.prototype.perpareInsertQuery = function(data, table) {
   
   return query;
 };
+
+// prepare select query
+MySQL.prototype.perpareSelectQuery = function(table, columns, limit) {
+  
+  var query = '';
+  
+  if ( columns.length === 0 ) {
+    query = 'SELECT * FROM ' + table;
+  } else {
+
+    var fetchColumns = '';
+    // prepare data 
+    for (var column in columns) {
+      fetchColumns += column + ',';
+    }
+
+    fetchColumns = fetchColumns.replace(/,\s*$/, "");
+
+    query = 'SELECT '+ fetchColumns +' FROM ' + table;
+  }
+
+  return query;
+};
 /**
 * 
 * @params
@@ -33,7 +56,7 @@ MySQL.prototype.perpareInsertQuery = function(data, table) {
 **/
 MySQL.prototype.executeQuery = function(db, query, callback) {
 
-  db.query( query, function insertCallback(err, result) {
+  db.query( query, function queryCallback(err, result) {
     callback(err, result);
   });
 
