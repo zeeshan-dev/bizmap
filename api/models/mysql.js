@@ -26,7 +26,7 @@ MySQL.prototype.perpareInsertQuery = function(table, data) {
 };
 
 // prepare select query
-MySQL.prototype.perpareSelectQuery = function(table, columns, limit) {
+MySQL.prototype.perpareSelectQuery = function(table, columns, start, limit) {
   
   var query = '';
   
@@ -45,6 +45,27 @@ MySQL.prototype.perpareSelectQuery = function(table, columns, limit) {
     query = 'SELECT '+ fetchColumns +' FROM ' + table;
   }
 
+  if ( start && start > 0 && limit && limit > 0 ) {
+    query = query + ' LIMIT ' + start + ',' + limit;
+  }
+
+  return query;
+};
+
+// prepare search query
+MySQL.prototype.perpareSearchQuery = function(table, columns, start, searchKey) {
+  
+  var query = 'SELECT * FROM ' + table;
+  var where = ' WHERE ';
+
+  // prepare data 
+  for (var i=0; i<columns.length; i++) {
+    where += columns[i] + " REGEXP '" + searchKey + "' OR ";
+  }
+
+  where = where.replace(/OR\s*$/, "");
+  query = query + where + ' LIMIT ' + start + ',' + 10 + ';';
+  
   return query;
 };
 /**

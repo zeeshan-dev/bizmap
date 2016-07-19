@@ -4,6 +4,7 @@ module.exports = Object.freeze({
 	ERROR_QUERY_EXECUTION: 'Unable to execute query',
 	INVALID_POST: 'Post fields are missing.',
 	BUSINESS_ADDED_SUCCESSFULLY:'Business added successfully.',
+	PARAM_MISSING:'Query parameter missing',
 	FAIL:'FAIL',
 	OK:'OK'
 

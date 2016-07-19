@@ -124,7 +124,7 @@
 
         if (err) { 
           // sending response
-          Response.QUERY_EXECUTION_ERROR(res, responseJSON);
+          Response.QUERY_EXECUTION_ERROR(res, responseJSON, err);
           return;
         }
 
@@ -141,6 +141,56 @@
       // sending response
       Response.CONNECTION_ERROR(res, responseJSON);      
     }
+      
+
+  });
+
+  /*
+  * Search businesses
+  */
+  app.get('/api/business/search', function(req, res) {
+    
+    logger.info('Inside GET /api/business/search');
+    var responseJSON = {};
+
+    if (req.query.q) {
+          // mysql model instance
+      var mySqlModel = new MySQL();
+
+      if ( config.mysqlConnection ) {
+        var columns = ['name', 'mainCategory', 'subCategory'];
+        var start = req.query.start || 0; 
+        var queryString = mySqlModel.perpareSearchQuery('business', columns, start, req.query.q);
+
+        // execute query
+        mySqlModel.executeQuery( config.mysqlConnection, queryString, function searchCallback(err, result) {
+
+          if (err) { 
+            // sending response
+            Response.QUERY_EXECUTION_ERROR(res, responseJSON, err);
+            return;
+          }
+
+          // list of all business data
+          logger.info('Sending total '+ result.length +' business records');
+          responseJSON.status = MESSAGES.OK;
+          responseJSON.data = result; 
+          // response to request
+          res.jsonp(HTTP.OK, responseJSON);
+        
+        });
+      
+      } else {
+        // sending response
+        Response.CONNECTION_ERROR(res, responseJSON);      
+      }
+    
+    } else {
+
+      logger.info('Search query param q is missing');
+      Response.QUERY_PARAM_MISSING_ERROR(res, responseJSON);
+    }
+
       
 
   });

@@ -28,7 +28,7 @@ response.CONNECTION_ERROR = function(res, responseJSON) {
   res.jsonp(HTTP.INTERNAL_SERVER_ERROR, responseJSON);
 };
 
-response.QUERY_EXECUTION_ERROR = function(res, responseJSON) {
+response.QUERY_EXECUTION_ERROR = function(res, responseJSON, err) {
 
   // mysql query execution error
   logger.info(JSON.stringify(err));
@@ -36,5 +36,15 @@ response.QUERY_EXECUTION_ERROR = function(res, responseJSON) {
   responseJSON.message = MESSAGES.ERROR_QUERY_EXECUTION + ' error: '  + JSON.stringify(err);
   // response to request
   res.jsonp(HTTP.INTERNAL_SERVER_ERROR, responseJSON);
+
+};
+
+response.QUERY_PARAM_MISSING_ERROR = function(res, responseJSON) {
+
+  // mysql query param missing error
+  responseJSON.status = MESSAGES.FAIL;
+  responseJSON.message = MESSAGES.PARAM_MISSING;
+  // response to request
+  res.jsonp(HTTP.BAD_REQUEST, responseJSON);
 
 };
