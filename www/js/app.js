@@ -20,6 +20,14 @@ var app = angular.module('starter', ['ionic', /*'ionic-material'*/,'starter.cont
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    if (window.cordova) {
+      cordova.plugins.diagnostic.isLocationEnabled(function(enabled) {
+          alert("Location is " + (enabled ? "enabled" : "disabled"));
+      }, function(error) {
+          alert("The following error occurred: " + error);
+      });
+    }
   });
 })
 
