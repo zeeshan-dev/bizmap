@@ -22,6 +22,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
   Loading.show();
 
   $scope.initMap = function() {
+    console.log('initMap');
     var center = $scope.location;
     map = new google.maps.Map(document.getElementById('list-map'), {
       center: center,
@@ -125,6 +126,11 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
     // hide loading
     Loading.hide();
   }
+
+  $scope.$on( "$ionicView.enter", function( scopes, states ) {
+    console.log('e');
+           google.maps.event.trigger( map, 'resize' );
+  });
 
     
 }]);

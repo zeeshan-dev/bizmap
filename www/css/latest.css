@@ -6,7 +6,7 @@
 }
 .mainPage{ background:url(../img/mainBg.png) no-repeat; background-size:100% 100%; width:100%; height:100%; position:absolute; top:0px; left:0px;}
 .mainInner{ width:80%; margin:0 auto; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); transform: translateY(-50%); position:relative;}
-.inputSearch{ background-image:url(../img/searchIcon.png); background-repeat:no-repeat; background-position: 10px center; background-color:rgba(255,255,255,0.6); background-size:7%; width:100%; height:40px; line-height:40px; font-size:20px; font-family: 'Lato', Arial, Helvetica, sans-serif; padding:0px 10px; border:none; box-shadow:none; font-weight:300; padding-left:40px;}
+.inputSearch{ background-image:url(../img/searchIcon.png); background-repeat:no-repeat; background-position: 10px center; background-color:rgba(255,255,255,0.6); background-size:7%; width:100%; height:40px !important; line-height:40px !important; font-size:20px !important; font-family: 'Lato', Arial, Helvetica, sans-serif; padding:0px 10px; border:none !important; box-shadow:none; font-weight:700; padding-left:40px !important;color: #777 !important;text-decoration: none;}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #222;
 }
@@ -25,11 +25,11 @@
 .mainBoxInner img{ margin-bottom:5px; height:40px;}
 .mainBox{ margin-bottom:30px; list-style:none;}
 .innerPage{ background:url(../img/innerBg.png) no-repeat; background-size:100% 100%; width:100%; height:100%; position:absolute; top:0px; left:0px; background-attachment:fixed;}
-.innerHeader{ background:url(../img/innerHeader.png) no-repeat; background-size:cover; width:100%; height:200px;}
+.innerHeader{ background:url(../img/grow-business.jpg) no-repeat; background-size:cover; width:100%; height:200px;}
 .menuIcon{ position:absolute; top:0px; left:0px;}
 .menuIcon button{ background:transparent; border:none; box-shadow:none; padding:15px;}
 .icon-bar{ height:4px; margin-bottom:4px; display:block; background:#fff; width:25px;}
-.headerBox{ background:#fff; font-size:9px; color:#222; font-family: 'Lato', Arial, Helvetica, sans-serif; font-weight:400; text-align:center; padding:5px 0; display:block; text-decoration:none; box-shadow:0px 0px 20px #aaa;}
+.headerBox{ background:#fff; font-size:9px; line-height:9px;color:#222; font-family: 'Lato', Arial, Helvetica, sans-serif; font-weight:400; text-align:center; padding:5px 0; display:block; text-decoration:none; box-shadow:0px 0px 20px #aaa;}
 .headerBox:hover, .headerBox:focus{ text-decoration:none; color:#222;}
 .headerBox img{ margin-bottom:5px; height:20px;}
 .headerBoxes{ margin-top:-20px;}
@@ -43,12 +43,13 @@
 .itemList ul li .listItem{box-shadow:0px 0px 20px #aaa; position:relative;}
 .itemList ul li .listDetails{ width:100%; background:#fff; padding:5px;}
 .listDetailLeft{ float:left; width:calc( 100% - 50px ); font-size:12px; color:#555; font-family: 'Lato', Arial, Helvetica, sans-serif; font-weight:400;}
-.listDetailRight a{ width:20px; height:20px; margin-left:5px; border-radius:100%; border:1px solid #00aeef; color:#00aeef; font-size:12px; display:inline-block; text-align:center; line-height:20px; vertical-align:middle; margin-top: 5px; float:left;}
+.listDetailRight a{ width:20px; height:20px; margin-left:5px; border-radius:100%; border:1px solid #00aeef; color:#00aeef; font-size:12px; display:inline-block; text-align:center; line-height:20px; vertical-align:middle; margin-top: 5px; float:left; 
+    text-decoration: none;}
 .listDetailRight a i:before{ font-size:12px !important; margin-left:0px;}
 .listDetailRight{ float:right; width:50px;}
 .itemRating{ height:auto;}
 .itemRating i{ color:#eac705; vertical-align:text-top; line-height:13px;}
 .itemRating i:before{ font-size:12px !important;}
 .viewMoreLink{ font-size:16px; color:#555; font-family: 'Lato', Arial, Helvetica, sans-serif; font-weight:400; background:#fff; text-align:center; line-height:40px; height:40px; border-bottom:5px solid #295f7f; width:100%; display:block; margin:15px auto 0 auto;}
-.shareLink{ width:20px; height:20px; border-radius:100%; color:#295f7f; font-size:18px; display:block; text-align:center; line-height:20px; vertical-align:middle; background:rgba(255,255,255,0.6); position:absolute; top:5px; right:5px;}
+.shareLink{ width:20px; text-decoration:none;height:20px; border-radius:100%; color:#295f7f; font-size:18px; display:block; text-align:center; line-height:20px; vertical-align:middle; background:rgba(255,255,255,0.6); position:absolute; top:5px; right:5px;}
 .shareLink i:before{ font-size:12px !important; margin-left:0px;}

@@ -4,6 +4,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
   var posOptions = {timeout: 10000, enableHighAccuracy: false};
   $scope.location = {lat : 0 ,lng : 0};
   $scope.error = 'None';
+
   var myObj = $scope;
    $cordovaGeolocation
    .getCurrentPosition(posOptions)
@@ -22,8 +23,12 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
       });
 
    }, function(err) {
-      console.log(err)
-      alert('GCP: ' + err.message);
+      
+      if ( err.code === 2 ) {
+        alert('Please check your internet connection.');
+      } else {
+        alert('GCP: ' + err.message);
+      }
    });
 
   var watchOptions = {timeout : 3000, enableHighAccuracy: false};
@@ -56,6 +61,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
       alert('Please wait while we are getting your current location.');
       return;
     }
+    
     $state.go('list', {type:type});
    }
 
@@ -104,4 +110,23 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
     return $scope.shownGroup === group;
   };
 
+  $scope.items = [
+        {display: 'Accounting', value:'accounting'},
+        {display: 'Airport', value:'airport'},
+        {display: 'Atm', value:'atm'},
+        {display: 'Bakery', value:'bakery'},
+        {display: 'Bank', value:'bank'},
+        {display: 'Beauty Salon', value:'beauty_salon'},
+        {display: 'Book Store', value:'book_store'},
+        {display: 'Business', value:'business'},
+        {display: 'Business', value:'business'},
+        {display: 'Doctor', value:'doctor'}
+    ];
+   $scope.onSelect = function(item) {
+    console.log('The selected item is: '+JSON.stringify(item['value']));
+    $state.go('list', {type:item['value']})
+  };
+
 }]);
+// for slider left menu
+// http://julienrenaux.fr/2014/05/09/ionic-framework-features-you-may-have-missed/
