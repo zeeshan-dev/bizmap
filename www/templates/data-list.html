@@ -3,11 +3,11 @@
       <!-- <button class="button" >
           <i ng-click="showMap()" ng-class="listView ? 'ion-location' : 'ion-navicon'"></i> 
       </button> -->
-      <button class="button  buttons button-icon header-item ion-location" ng-click="showMap()" ng-class="listView ? 'ion-location' : 'ion-navicon'">
+      <button class="button  buttons button-icon header-item ion-location" ng-click="showMap()" ng-class="mapView ? 'ion-navicon' : 'ion-location'">
       </button>
     </ion-nav-buttons>
   <ion-content>
-    <ion-list ng-show="listView">
+    <ion-list ng-show="!mapView">
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="list in lists" type="item-text-wrap" href="#detail/{{list.place_id}}">
         <img ng-src="{{list.icon}}">
         <h2 class="positive">{{list.name}}</h2>
@@ -16,6 +16,6 @@
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
-     <div id="list-map" ng-show="!listView"></div>
+     <div id="list-map" ng-show="mapView"></div>
     </ion-content>
 </ion-view>

@@ -7,7 +7,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
   $scope.title = $scope.type.charAt(0).toUpperCase() + $scope.type.slice(1);
 	$scope.location = $localstorage.getObject('location');
 	$scope.lists = [];
-  $scope.listView =  false;
+  $scope.mapView =  true;
   $scope.distanceUnit = ' km';
 	var myObj = $scope;
 	
@@ -22,7 +22,6 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
   Loading.show();
 
   $scope.initMap = function() {
-    console.log('initMap');
     var center = $scope.location;
     map = new google.maps.Map(document.getElementById('list-map'), {
       center: center,
@@ -65,7 +64,9 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
 
     // hide loading
     Loading.hide();
+
   }
+
   function createMarker(place) {
 
     var placeLoc = place.geometry.location;
@@ -91,33 +92,10 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
   *
   **/
   $scope.showMap = function() {
-    $scope.listView = !$scope.listView;
+    $scope.mapView = !$scope.mapView;
   }
 
-  $ionicModal.fromTemplateUrl('../templates/map-list.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-  $scope.openModal = function() {
-    $scope.modal.show();
-  };
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
-  //Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modal.remove();
-  });
-  // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
-    // Execute action
-  });
-  // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
-    // Execute action
-  });
+
 
   if (typeof google === 'object' && typeof google.maps === 'object') {
       $scope.initMap();
@@ -127,10 +105,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
     Loading.hide();
   }
 
-  $scope.$on( "$ionicView.enter", function( scopes, states ) {
-    console.log('e');
-           google.maps.event.trigger( map, 'resize' );
-  });
+  
 
     
 }]);

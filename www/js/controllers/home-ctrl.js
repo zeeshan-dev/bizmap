@@ -1,7 +1,7 @@
 app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$state', '$localstorage',
   function($scope, $location, $cordovaGeolocation, $state, $localstorage) {
 
-  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  var posOptions = {timeout: 30000, enableHighAccuracy: false};
   $scope.location = {lat : 0 ,lng : 0};
   $scope.error = 'None';
 
@@ -12,9 +12,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
    .then(function (position) {
       var lat  = position.coords.latitude
       var long = position.coords.longitude
-      console.log('getCurrentPosition');
       console.log(lat + '   ' + long);
-
+      alert("Success: location found");
       myObj.location.lat = lat;
       myObj.location.lng = long;
       $localstorage.setObject('location', {
@@ -27,7 +26,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
       if ( err.code === 2 ) {
         alert('Please check your internet connection.');
       } else {
-        alert('GCP: ' + err.message);
+        alert('Please enable location service');
       }
    });
 
@@ -53,6 +52,12 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
    );
 
    watch.clearWatch();
+
+  /*cordova.plugins.diagnostic.isWifiEnabled(function(enabled){
+    console.log("WiFi is " + (enabled ? "enabled" : "disabled"));
+  }, function(error){
+      console.error("The following error occurred: "+error);
+  });*/
 
    $scope.type = function(type) {
     var location = $localstorage.getObject('location');
@@ -126,6 +131,17 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
     console.log('The selected item is: '+JSON.stringify(item['value']));
     $state.go('list', {type:item['value']})
   };
+
+  // fix for map loading issue in list screen
+  $scope.$on( "$ionicView.enter", function( scopes, states ) {
+    
+    // remove div if already exist
+    if (document.contains(document.getElementById("list-map"))) {
+      document.getElementById("list-map").remove();
+    }  
+
+  });
+
 
 }]);
 // for slider left menu
