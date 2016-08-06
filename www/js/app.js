@@ -40,54 +40,21 @@ var app = angular.module('starter', ['ionic', /*'ionic-material'*/,'starter.cont
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
-
-  .state('tab.chats', {
-      url: '/chats',
+  .state('eventmenu', {
+      url: "/event",
+      abstract: true,
+      templateUrl: "templates/event-menu.html"
+    })
+    .state('eventmenu.home', {
+      url: "/home",
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'menuContent' :{
+          templateUrl: "templates/home.html",
+          controller: 'HomeCtrl',
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  }).state('list', {
+  .state('list', {
     url: '/list/:type',
     views: {
       '': {
@@ -103,19 +70,19 @@ var app = angular.module('starter', ['ionic', /*'ionic-material'*/,'starter.cont
         controller: 'DetailCtrl'
       }
     }
-  }).state('home', {
-          url: '/home',
+  }).state('homes', {
+          url: '/homes',
           views: {
               '': {
                   templateUrl: 'templates/home.html',
                   controller: 'HomeCtrl',
               }
           }
-    })
-;
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
-  $urlRouterProvider.otherwise('/home');
+  //$urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise("/event/home");
 
 });

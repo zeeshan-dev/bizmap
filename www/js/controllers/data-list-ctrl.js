@@ -17,7 +17,9 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$localstorage', '$ion
   var map;
   var infowindow;
   var markerBounds;
-
+$scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = true;
+});
   // show loading
   Loading.show();
 

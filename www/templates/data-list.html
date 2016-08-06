@@ -1,4 +1,4 @@
-<ion-view view-title="{{ title }}">
+<ion-view  id="listView">
  <ion-nav-buttons side="right">
       <!-- <button class="button" >
           <i ng-click="showMap()" ng-class="listView ? 'ion-location' : 'ion-navicon'"></i> 
@@ -16,6 +16,6 @@
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
-     <div id="list-map" ng-show="mapView"></div>
+     <div id="list-map" name="list-map" ng-show="mapView"></div>
     </ion-content>
 </ion-view>

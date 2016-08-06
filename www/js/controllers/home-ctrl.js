@@ -134,12 +134,8 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
 
   // fix for map loading issue in list screen
   $scope.$on( "$ionicView.enter", function( scopes, states ) {
-    
-    // remove div if already exist
-    if (document.contains(document.getElementById("list-map"))) {
-      document.getElementById("list-map").remove();
-    }  
-
+    // remove list view on on home page 
+    document.getElementById("listView").remove();
   });
 
 
