@@ -136,3 +136,34 @@ li.appAdmin{display:inline-block; margin-top:0;}
 .card, .list-inset {
     margin: 3px !important;
 }
+
+
+.bar.bar-positive {
+  background: transparent;
+  border-bottom-width: 0;
+}
+
+.card-list-logo {
+  right: 10px;
+  top: 10px;
+  position: absolute;
+  max-width: 70px;
+  max-height: 70px;
+}
+.listLabel {
+  font-size: 15px;
+  text-decoration: none !important;
+  text-overflow: ellipsis;
+  color:#1989B7 !important;
+}
+.listButtons {
+  height: 46px;
+  border-radius: 0px;
+  margin-top: 0px !important;
+  background-color: #1989B7 !important;
+}
+.addressBar {
+  color:#000 !important;
+}
+
+ 

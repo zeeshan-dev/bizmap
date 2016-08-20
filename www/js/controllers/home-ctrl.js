@@ -1,5 +1,5 @@
-app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$state', '$localstorage',
-  function($scope, $location, $cordovaGeolocation, $state, $localstorage) {
+app.controller('HomeCtrl', ['$scope', '$ionicScrollDelegate', '$location', '$cordovaGeolocation', '$state', '$localstorage',
+  function($scope, $ionicScrollDelegate, $location, $cordovaGeolocation, $state, $localstorage) {
 
   var posOptions = {timeout: 30000, enableHighAccuracy: false};
   $scope.location = {lat : 0 ,lng : 0};
@@ -13,7 +13,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
       var lat  = position.coords.latitude
       var long = position.coords.longitude
       console.log(lat + '   ' + long);
-      alert("Success: location found");
+      //alert("Success: location found");
       myObj.location.lat = lat;
       myObj.location.lng = long;
       $localstorage.setObject('location', {
@@ -70,27 +70,39 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
     $state.go('list', {type:type});
    }
 
- /* $scope.groups = [{
-    name: "Restaurants",
-    items: []
+  $scope.groups = [{
+    path: "img/business/max.png"
   },
   {
-    name: "Businesses",
-    items: []    
-
+    path: "img/business/mcdonalds.jpg",
   },
   {
-    name: "Hospitals",
-    items: []
+    path: "img/business/telenor_400_400_black.jpg",
   },
-
   {
-    name: "Banks"
-    items: []
-  }];*/
+    path: "img/business/Ufone-Logo1.jpg"
+  },
+  {
+    path: "img/business/lg.jpg"
+  },
+  {
+    path: "img/business/samsung-logo.jpg"
+  },
+  {
+    path: "img/business/Oye-Hoye-Six-Flavors-2.jpg"
+  },
+  {
+    path: "img/business/maxresdefault.jpg"
+  },
+  {
+    path: "img/business/pepsi.png"
+  },
+  {
+    path: "img/business/cocacola.png"
+  }];
   var titleList = ["Food and Beverage", "Hospitals", "Banks"]
-  $scope.groups = [];
-  for (var i=0; i<3; i++) {
+  /*$scope.groups = [];
+  for (var i=0; i<10; i++) {
     $scope.groups[i] = {
       name: titleList[i],
       items: []
@@ -98,7 +110,7 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
     for (var j=0; j<1; j++) {
       $scope.groups[i].items.push(i + '-' + j);
     }
-  }
+  }*/
   
   /*
    * if given group is the selected group, deselect it
@@ -134,9 +146,19 @@ app.controller('HomeCtrl', ['$scope', '$location', '$cordovaGeolocation', '$stat
 
   // fix for map loading issue in list screen
   $scope.$on( "$ionicView.enter", function( scopes, states ) {
-    // remove list view on on home page 
-    document.getElementById("listView").remove();
+    // remove list view on on home page
+    if (document.getElementById("listView") !== null) {
+      document.getElementById("listView").remove();  
+    } 
+    
   });
+  
+  $scope.getScrollPosition = function(){
+   
+   if ( $ionicScrollDelegate.getScrollPosition().top > 78 ) {
+
+   }
+  }
 
 
 }]);

@@ -12,6 +12,7 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading
   $scope.rating = {};
   $scope.rating.max = 5;
   $scope.readOnly = true;
+  var markerImage = 'img/mapIcon.png'; 
 
   // show loading
   Loading.show();
@@ -31,7 +32,8 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         var marker = new google.maps.Marker({
           map: map,
-          position: place.geometry.location
+          position: place.geometry.location,
+          icon: markerImage
         });
         google.maps.event.addListener(marker, 'mousedown', function() {
           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +

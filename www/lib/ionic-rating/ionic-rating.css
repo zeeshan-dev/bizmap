@@ -3,8 +3,8 @@ ul.rating li {
   border: 0px;
   background: none;
   padding: 5px 10px;
-  color: #fd3b01;/*#f8fe00;*/
+  color: #FFCC00;/*#f8fe00;*/
 }
 ul.rating li i {
-  font-size: 20px;
+  font-size: 25px;
 }

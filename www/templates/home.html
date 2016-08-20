@@ -1,6 +1,6 @@
 <ion-view class="view-custom" >
 
-  <ion-content >
+  <ion-content style="top:0px;" on-scroll="getScrollPosition()">
 <div class="innerPage">
 	<div class="innerHeader">
     <!-- 	<div class="menuIcon">
@@ -54,10 +54,10 @@
     </div>
     <h1 class="itemHeading"><div class="headingStrip"></div>Most Popular<div class="headingStrip"></div></h1>
     <div class="container-fluid itemList">
-    	<ul>
+    	<ul ng-repeat="group in groups">
         	<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
             	<div class="listItem">
-                    <img src="img/sampleImg.png" />
+                    <img src="{{group.path}}" />
                     <div class="listDetails">
                         <div class="listDetailLeft">
                             <div class="itemTitle">Bar B Q Tonight</div>
@@ -72,23 +72,8 @@
                     <a href="#" class="shareLink"><i class="flaticon-share-connection-sing"></i></a>
                 </div>
             </li>
-            <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            	<div class="listItem">
-                    <img src="img/sampleImg.png" />
-                    <div class="listDetails">
-                        <div class="listDetailLeft">
-                            <div class="itemTitle">Bar B Q Tonight</div>
-                            <div class="itemRating"><i class="flaticon-black-star"></i> <i class="flaticon-black-star"></i> <i class="flaticon-black-star"></i> <i class="flaticon-black-star"></i> <i class="flaticon-empty-star"></i></div>
-                        </div>
-                        <div class="listDetailRight">
-                            <a href="#"><i class="flaticon-location-pointer"></i></a>
-                            <a href="#"><i class="flaticon-handset"></i></a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <a href="#" class="shareLink"><i class="flaticon-share-connection-sing"></i></a>
-                </div>
-            </li>
+      
+
         </ul>
         <div class="clearfix"></div>
         <a href="#" class="viewMoreLink col-lg-12">View More</a>

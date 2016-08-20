@@ -1,3 +1,4 @@
+
 <ion-view  id="listView">
  <ion-nav-buttons side="right">
       <!-- <button class="button" >
@@ -7,6 +8,27 @@
       </button>
     </ion-nav-buttons>
   <ion-content>
+  <div class="list card" ng-repeat="list in lists" ng-show="!mapView">
+
+    <div class="item" style="margin-bottom: -24px;">
+      <h1 class="positive"><a href="#detail/{{list.place_id}}" class="listLabel">{{$index+1}}. {{list.name}}</a></h1>
+      <img ng-src="img/business/cocacola.png" class="card-list-logo">
+      <p class="rating-p"><rating ng-model="rating.rate" max="rating.max" readonly="readOnly"></rating></p>
+      <p><strong>{{list.distance}}{{distanceUnit}} | Food</strong></p>
+      <p class="addressBar">{{list.vicinity}}</p>
+      <div class="row" style="margin:0px!important;">
+        <div class="col">
+          <a class="button button-block button-positive listButtons" ng-click='openUrl()'>
+            <i class="icon ion-arrow-graph-up-left" style="padding-right: 5px;"></i>DIRECTIONS
+          </a>
+        </div>
+        <div class="col">
+          <a ng-href="tel: 03222569865" class="button button-block button-positive listButtons" >
+          <i class="icon ion-ios-telephone" style="padding-right: 5px;"></i>CALL</a>
+        </div>
+    </div>
+    </div>
+  </div>
     <ion-list ng-show="!mapView">
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="list in lists" type="item-text-wrap" href="#detail/{{list.place_id}}">
         <img ng-src="{{list.icon}}">
