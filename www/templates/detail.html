@@ -1,54 +1,43 @@
 <ion-view view-title="Details">
-<ion-nav-bar class="bar-energized">   
-<ion-nav-back-button></ion-nav-back-button>
-</ion-nav-bar>
-  <ion-content>
-   	 <div class="list card">
-
-	  <div class="item">
-	    <h1 class="positive detailLabel">{{place.name}}</h1>
-	    <p class="rating-p"><rating ng-model="rating.rate" max="rating.max" readonly="readOnly"></rating></p>
-	    <p><strong>{{distance}}{{distanceUnit}}</p>
-	    <p style="word-wrap:break-word;">{{place.formatted_address}}</p>
-	  </div>
-
-	  <div class="item">
-	 <!--  <button class="button button-medium button-positive">
-		  <i class="icon ion-ios-direction" ></i>
-	  		 	DIRECTIONS
-	  </button>
-	  <button class="button button-medium button-positive">
-		  <i class="icon ion-ios-telephone" ></i>
-	  		 <a ng-href="tel: 03222569865"></a>
-	 	CALL
-	  </button> -->
-
-	  
-	    <!-- <a class="item item-icon-left" ng-href="tel: 03222569865">
-	    <i class="icon ion-ios-telephone" ></i>
-	     03222569865
-	  </a>
-	  <a href="#" class="item item-icon-left">
-	    <i class="icon ion-ios-email"></i>
-	   	mail.mzeeshan@gmail.com
-	  </a> -->
-	  <div class="row" style="margin:0px!important;">
-        <div class="col">
-          <a class="button button-block button-positive listButtons" ng-click='openUrl()'>
-            <i class="icon ion-arrow-graph-up-left" style="padding-right: 5px;"></i>DIRECTIONS
-          </a>
-        </div>
-        <div class="col">
-          <a ng-href="tel: 03222569865" class="button button-block button-positive listButtons" >
-          <i class="icon ion-ios-telephone" style="padding-right: 5px;"></i>CALL</a>
-        </div>
-    </div>
-    
- 
-	  	
-	  </div>
-  	</div>
-
-     <div id="detail-map"  style="width: 100%;height:250px;"></div>
-     </ion-content>
+   <ion-nav-bar class="bar-energized">
+      <ion-nav-back-button></ion-nav-back-button>
+   </ion-nav-bar>
+   <ion-content>
+      <div class="list card">
+         <div class="item">
+            <h1 class="positive detailLabel">{{place.name}}</h1>
+            <p class="rating-p">
+               <rating ng-model="rating.rate" max="rating.max" readonly="readOnly"></rating>
+            </p>
+            <p>{{distance}}{{distanceUnit}}</p>
+            <p style="white-space: normal;">{{place.formatted_address}}</p>
+         </div>
+         <div class="item">
+            <div class="row" style="margin:0px!important;">
+               <div class="col">
+                  <a class="button button-block button-positive listButtons" ng-click='openUrl()'>
+                  <i class="icon ion-arrow-graph-up-left" style="padding-right: 5px;"></i>DIRECTIONS
+                  </a>
+               </div>
+               <div class="col">
+                  <a ng-href="tel: 03222569865" class="button button-block button-positive listButtons" >
+                  <i class="icon ion-ios-telephone" style="padding-right: 5px;"></i>CALL</a>
+               </div>
+            </div>
+         </div>
+         <div class="item">
+           <a class="item item-icon-left" href="mailto:info@gmail.com">
+            <i class="icon ion-email"></i>
+            info@gmail.com
+           </a>
+         </div>
+         <div class="item">
+           <a class="item item-icon-left" href="http://www.google.com">
+            <i class="icon ion-ios-world"></i>
+            http://www.google.com
+           </a>
+         </div>
+      </div>
+      <div id="detail-map"  style="width: 100%;height:250px;"></div>
+   </ion-content>
 </ion-view>

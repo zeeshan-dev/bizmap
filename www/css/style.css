@@ -166,11 +166,14 @@ li.appAdmin{display:inline-block; margin-top:0;}
   font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
 }
 .listButtons {
-  height: 46px;
+  height: 36px !important;
+  min-height: 40px !important;
   border-radius: 0px;
   margin-top: 0px !important;
   /*background-color: #1989B7 !important;*/
   background-color: #01796f !important;
+  font-size: 13px !important;
+  line-height: 40px !important;
 }
 .addressBar {
   color:#000 !important;
