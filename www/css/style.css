@@ -154,16 +154,28 @@ li.appAdmin{display:inline-block; margin-top:0;}
   font-size: 15px;
   text-decoration: none !important;
   text-overflow: ellipsis;
-  color:#1989B7 !important;
+  /*color:#1989B7 !important;*/
+  color: #01796f !important;
+  font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+}
+.detailLabel {
+  color: #01796f !important;
+  font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+}
+.detailAddressLabel {
+  font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
 }
 .listButtons {
   height: 46px;
   border-radius: 0px;
   margin-top: 0px !important;
-  background-color: #1989B7 !important;
+  /*background-color: #1989B7 !important;*/
+  background-color: #01796f !important;
 }
 .addressBar {
   color:#000 !important;
 }
-
- 
+.bar-energized {
+  background-color: #01796f !important;
+  border-color:#01796f !important;
+}

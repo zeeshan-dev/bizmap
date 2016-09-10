@@ -24,7 +24,7 @@
 .mainBoxInner:hover, .mainBoxInner:focus{ text-decoration:none; color:#222;}
 .mainBoxInner img{ margin-bottom:5px; height:40px;}
 .mainBox{ margin-bottom:30px; list-style:none;}
-.innerPage{ background:url(../img/innerBg.png) no-repeat; background-size:100% 100%; width:100%; height:100%; position:absolute; top:0px; left:0px; background-attachment:fixed;}
+.innerPage{ background:url(../img/innerBg.png) no-repeat; background-size:100% 100%; width:100%; height: auto; position:absolute; top:0px; left:0px; }
 .innerHeader{ background:url(../img/grow-business.jpg) no-repeat; background-size:cover; width:100%; height:200px;}
 .menuIcon{ position:absolute; top:0px; left:0px;}
 .menuIcon button{ background:transparent; border:none; box-shadow:none; padding:15px;}

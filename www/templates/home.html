@@ -54,8 +54,8 @@
     </div>
     <h1 class="itemHeading"><div class="headingStrip"></div>Most Popular<div class="headingStrip"></div></h1>
     <div class="container-fluid itemList">
-    	<ul ng-repeat="group in groups">
-        	<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    	<ul >
+        	<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-repeat="group in groups" style="margin: 5px 0;">
             	<div class="listItem">
                     <img src="{{group.path}}" />
                     <div class="listDetails">

@@ -1,12 +1,15 @@
 <ion-view view-title="Details">
+<ion-nav-bar class="bar-energized">   
+<ion-nav-back-button></ion-nav-back-button>
+</ion-nav-bar>
   <ion-content>
    	 <div class="list card">
 
 	  <div class="item">
-	    <h1 class="positive">{{place.name}}</h1>
+	    <h1 class="positive detailLabel">{{place.name}}</h1>
 	    <p class="rating-p"><rating ng-model="rating.rate" max="rating.max" readonly="readOnly"></rating></p>
 	    <p><strong>{{distance}}{{distanceUnit}}</p>
-	    <p>{{place.formatted_address}}</p>
+	    <p style="word-wrap:break-word;">{{place.formatted_address}}</p>
 	  </div>
 
 	  <div class="item">
@@ -29,28 +32,20 @@
 	    <i class="icon ion-ios-email"></i>
 	   	mail.mzeeshan@gmail.com
 	  </a> -->
-
+	  <div class="row" style="margin:0px!important;">
+        <div class="col">
+          <a class="button button-block button-positive listButtons" ng-click='openUrl()'>
+            <i class="icon ion-arrow-graph-up-left" style="padding-right: 5px;"></i>DIRECTIONS
+          </a>
+        </div>
+        <div class="col">
+          <a ng-href="tel: 03222569865" class="button button-block button-positive listButtons" >
+          <i class="icon ion-ios-telephone" style="padding-right: 5px;"></i>CALL</a>
+        </div>
+    </div>
     
  
-	  	<div class="row">
-		  <div class="col">
-		    <button class="button button-block button-positive"> 
-		    	<i class="icon ion-arrow-graph-up-left" ></i>
-		    	DIRECTIONS
-	  		 </button>
-
-		  </div>
-		  <div class="col">
-		   
-		  <a ng-href="tel: 03222569865" class="button button-block button-positive">
-		  <i class="icon ion-ios-telephone" ></i>
-		  CALL</a>
-		    <!-- <button class="button button-block button-positive">
-		    <i class="icon ion-ios-telephone" ></i>
-	  		 	<a ng-href="tel: 03222569865"></a>
-	  		 	CALL</button> -->
-		  </div>
-		</div>
+	  	
 	  </div>
   	</div>
 

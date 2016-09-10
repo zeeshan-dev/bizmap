@@ -1,5 +1,16 @@
 
 <ion-view  id="listView">
+<ion-nav-bar class="bar-energized">
+<div class="bar bar-header item-input-inset">
+  <label class="item-input-wrapper">
+    <i class="icon ion-ios-search placeholder-icon"></i>
+    <input type="search" placeholder="Search">
+  </label>
+  <button class="button button-clear">
+    Cancel
+  </button>
+</div>   
+<ion-nav-back-button></ion-nav-back-button>
  <ion-nav-buttons side="right">
       <!-- <button class="button" >
           <i ng-click="showMap()" ng-class="listView ? 'ion-location' : 'ion-navicon'"></i> 
@@ -7,6 +18,7 @@
       <button class="button  buttons button-icon header-item ion-location" ng-click="showMap()" ng-class="mapView ? 'ion-navicon' : 'ion-location'">
       </button>
     </ion-nav-buttons>
+</ion-nav-bar>
   <ion-content>
   <div class="list card" ng-repeat="list in lists" ng-show="!mapView">
 
@@ -15,7 +27,7 @@
       <img ng-src="img/business/cocacola.png" class="card-list-logo">
       <p class="rating-p"><rating ng-model="rating.rate" max="rating.max" readonly="readOnly"></rating></p>
       <p><strong>{{list.distance}}{{distanceUnit}} | Food</strong></p>
-      <p class="addressBar">{{list.vicinity}}</p>
+      <p>{{list.vicinity}}</p>
       <div class="row" style="margin:0px!important;">
         <div class="col">
           <a class="button button-block button-positive listButtons" ng-click='openUrl()'>
