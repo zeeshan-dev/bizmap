@@ -1,5 +1,5 @@
-app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading', 'Utility',
-	function($scope, $stateParams, $localstorage, Loading, Utility) {
+app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading', 'Utility','$window',
+	function($scope, $stateParams, $localstorage, Loading, Utility, window) {
 	
 	$scope.place_id = $stateParams.id;
   var myObj = $scope;
@@ -57,6 +57,11 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading
   } else {
     // hide loading
     Loading.hide();
+  }
+
+  $scope.share = function(t, msg, img, link){  
+    
+    window.plugins.socialsharing.share('Hello from Bizmap', 'Bizmap', 'https://www.google.nl/images/srpr/logo4w.png', null)
   }
 
     

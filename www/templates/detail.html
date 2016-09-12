@@ -1,6 +1,11 @@
 <ion-view view-title="Details">
    <ion-nav-bar class="bar-energized">
       <ion-nav-back-button></ion-nav-back-button>
+      <ion-nav-buttons side="right">
+      <button class="button button-icon icon ion-android-share-alt"
+    ng-click="share()">
+  </button>
+    </ion-nav-buttons>
    </ion-nav-bar>
    <ion-content>
       <div class="list card">
@@ -12,7 +17,7 @@
             <p>{{distance}}{{distanceUnit}}</p>
             <p style="white-space: normal !important;">{{place.formatted_address}}</p>
          </div>
-         <div class="item">
+         <div class="items">
             <div class="row" style="margin:0px!important;">
                <div class="col">
                   <a class="button button-block button-positive listButtons" ng-click='openUrl()'>
@@ -25,13 +30,13 @@
                </div>
             </div>
          </div>
-         <div class="item">
+         <div class="items">
            <a class="item item-icon-left" href="mailto:info@gmail.com">
             <i class="icon ion-email"></i>
             info@gmail.com
            </a>
          </div>
-         <div class="item">
+         <div class="items">
            <a class="item item-icon-left" href="http://www.google.com" onclick="window.open('http://www.google.com', '_system', 'location=yes'); return false;">
             <i class="icon ion-ios-world"></i>
             http://www.google.com
