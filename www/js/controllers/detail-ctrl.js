@@ -12,7 +12,7 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading
   $scope.rating = {};
   $scope.rating.max = 5;
   $scope.readOnly = true;
-  var markerImage = 'img/mapIcon.png'; 
+  var markerImage = 'img/marker.png'; 
 
   // show loading
   Loading.show();

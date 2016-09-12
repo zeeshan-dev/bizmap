@@ -10,7 +10,7 @@
                <rating ng-model="rating.rate" max="rating.max" readonly="readOnly"></rating>
             </p>
             <p>{{distance}}{{distanceUnit}}</p>
-            <p style="white-space: normal;">{{place.formatted_address}}</p>
+            <p style="white-space: normal !important;">{{place.formatted_address}}</p>
          </div>
          <div class="item">
             <div class="row" style="margin:0px!important;">
@@ -32,7 +32,7 @@
            </a>
          </div>
          <div class="item">
-           <a class="item item-icon-left" href="http://www.google.com">
+           <a class="item item-icon-left" href="http://www.google.com" onclick="window.open('http://www.google.com', '_system', 'location=yes'); return false;">
             <i class="icon ion-ios-world"></i>
             http://www.google.com
            </a>

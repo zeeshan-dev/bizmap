@@ -10,7 +10,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$state', '$localstora
   $scope.mapView =  true;
   $scope.distanceUnit = ' km';
 	var myObj = $scope;
-	var markerImage = 'img/mapIcon.png'; 
+	var markerImage = 'img/marker.png'; 
   $scope.rating = {};
   $scope.rating.max = 5;
   $scope.rating.rate = 5;
