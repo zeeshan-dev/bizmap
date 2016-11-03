@@ -23,8 +23,12 @@ angular.module('starter.controllers', [])
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
-
-.controller('AccountCtrl', function($scope) {
+.controller('NavCtrl', function($scope, $ionicSideMenuDelegate) {
+  $scope.showMenu = function () {
+    console.log('show menu');
+    $ionicSideMenuDelegate.toggleLeft();
+  };
+}).controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };

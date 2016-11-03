@@ -1,5 +1,5 @@
-app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading', 'Utility','$window',
-	function($scope, $stateParams, $localstorage, Loading, Utility, window) {
+app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading', 'Utility','$window', '$ionicModal', '$ionicScrollDelegate', '$ionicSlideBoxDelegate',
+	function($scope, $stateParams, $localstorage, Loading, Utility, window, $ionicModal, $ionicScrollDelegate, $ionicSlideBoxDelegate) {
 	
 	$scope.place_id = $stateParams.id;
   var myObj = $scope;
@@ -13,6 +13,44 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$localstorage','Loading
   $scope.rating.max = 5;
   $scope.readOnly = true;
   var markerImage = 'img/marker.png'; 
+
+  $scope.allImages = [{
+    src: 'https://3.bp.blogspot.com/-c6gsexcQGmA/VswW0JUYjqI/AAAAAAAAAdg/O443KyCAGas/s600/741-Donald-Duck.jpg'
+  }, {
+    src: 'http://2.bp.blogspot.com/-cT1O387TmOI/UFYi7R_BU6I/AAAAAAAACI4/d8mm5bp_idE/s600/hd-game-wallpaper-final-fantasy-vii-hd-3d-final-fantasy-achtergrond.jpg'
+  }, {
+    src: 'http://1.bp.blogspot.com/-o-9bYAUUank/UZ_9PS-gj_I/AAAAAAAABsQ/XCQGECYyZhc/s600/Mickey_Mouse_11.png'
+  }];
+ 
+  $scope.zoomMin = 1;
+
+$scope.showImages = function(index) {
+  $scope.activeSlide = index;
+  $scope.showModal('templates/gallery-zoomview.html');
+};
+ 
+$scope.showModal = function(templateUrl) {
+  $ionicModal.fromTemplateUrl(templateUrl, {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+    $scope.modal.show();
+  });
+}
+ 
+$scope.closeModal = function() {
+  $scope.modal.hide();
+  $scope.modal.remove()
+};
+ 
+  $scope.updateSlideStatus = function(slide) {
+    var zoomFactor = $ionicScrollDelegate.$getByHandle('scrollHandle' + slide).getScrollPosition().zoom;
+    if (zoomFactor == $scope.zoomMin) {
+      $ionicSlideBoxDelegate.enableSlide(true);
+    } else {
+      $ionicSlideBoxDelegate.enableSlide(false);
+    }
+  };
 
   // show loading
   Loading.show();

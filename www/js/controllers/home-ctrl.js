@@ -4,7 +4,9 @@ app.controller('HomeCtrl', ['$scope', '$ionicScrollDelegate', '$location', '$cor
   var posOptions = {timeout: 30000, enableHighAccuracy: false};
   $scope.location = {lat : 0 ,lng : 0};
   $scope.error = 'None';
-
+  var testLat = 24.820588;
+  var testLng = 67.034854;
+  
   var myObj = $scope;
    $cordovaGeolocation
    .getCurrentPosition(posOptions)

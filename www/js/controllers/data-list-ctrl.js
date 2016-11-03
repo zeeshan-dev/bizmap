@@ -50,7 +50,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$state', '$localstora
   }
 
   function callback(results, status) {
-
+    console.log('status',status);
     if (status === google.maps.places.PlacesServiceStatus.OK) {
     	
     	//myObj.$apply(function(){
@@ -138,7 +138,7 @@ app.controller('DataListCtrl', ['$scope', '$stateParams', '$state', '$localstora
   if (typeof google === 'object' && typeof google.maps === 'object') {
       $scope.initMap();
   } else {
-
+    alert('Please check your internet connection.');
     // hide loading
     Loading.hide();
   }

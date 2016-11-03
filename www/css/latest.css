@@ -29,13 +29,13 @@
 .menuIcon{ position:absolute; top:0px; left:0px;}
 .menuIcon button{ background:transparent; border:none; box-shadow:none; padding:15px;}
 .icon-bar{ height:4px; margin-bottom:4px; display:block; background:#fff; width:25px;}
-.headerBox{ background:#fff; font-size:9px; line-height:9px;color:#01796f; font-family: 'Lato', Arial, Helvetica, sans-serif; font-weight:400; text-align:center; padding:5px 0; display:block; text-decoration:none; box-shadow:0px 0px 20px #aaa;}
+.headerBox{ background:#fff; font-size:9px; line-height:9px;color:#28bb4e; font-family: 'Lato', Arial, Helvetica, sans-serif; font-weight:400; text-align:center; padding:5px 0; display:block; text-decoration:none; box-shadow:0px 0px 20px #aaa;}
 .headerBox:hover, .headerBox:focus{ text-decoration:none; color:#222;}
 .headerBox img{ margin-bottom:5px; height:20px;}
 .headerBoxes{ margin-top:-20px;}
 .headerBoxes li{ width:16%; margin-right: 5%; float:left;}
 .headerBoxes li:last-child{ margin-right:0px;}
-.itemHeading{font-size:18px; color:#01796f; font-family: 'Lato', Arial, Helvetica, sans-serif; font-weight:400; text-align:center; padding:15px 0; margin:0px;}
+.itemHeading{font-size:18px; color:#28bb4e; font-family: 'Lato', Arial, Helvetica, sans-serif; font-weight:400; text-align:center; padding:15px 0; margin:0px;}
 .headingStrip{ border-top:1px solid #555; width:90px; margin:0 10px; display:inline-block; vertical-align: top; margin-top: 9px;}
 .itemList ul li img{ width:100%;height:144px ;}
 .itemList ul li:nth-child(odd){ padding-left:0px; padding-right:8px;}

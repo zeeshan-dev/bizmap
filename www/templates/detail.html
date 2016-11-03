@@ -42,6 +42,17 @@
             http://www.google.com
            </a>
          </div>
+         <div class="item item-divider">
+          <i class="ion-images"></i>
+          Photos
+        </div>
+        
+        <a class="item item-list-detail">
+          <ion-scroll direction="x">
+            <img ng-repeat="image in allImages" ng-src="{{image.src}}" ng-click="showImages($index)" class="image-list-thumb"/>
+          </ion-scroll>
+        </a>
+        
       </div>
       <div id="detail-map"  style="width: 100%;height:250px;"></div>
    </ion-content>
