@@ -20,10 +20,24 @@
     var HTTP = require(__dirname + '/../http-response');
     var MESSAGES = require(__dirname + '/../strings');
     // mysql model
-    var MySQL = require(__dirname + '/../models/mysql');
+    var MySQL = require(__dirname + '/../models/Mysql');
     var Response = require(__dirname + '/../models/Response');
     var fs = require('fs');
 
+    app.post('/api/file', function(req, res) {
+      logger.info('Inside POST /api/file');
+      var responseJSON = {};
+      console.log('================ Body start =================');
+      console.log(req.body);
+      console.log('================ Body end =================');
+      console.log(req.files);
+      
+      responseJSON.status = MESSAGES.OK;
+      // response to request
+      res.jsonp(HTTP.OK, responseJSON);
+
+    });
+    
     // add business api
     app.post('/api/business', function(req, res) {
 
@@ -153,32 +167,63 @@
     logger.info('Inside GET /api/business/search');
     var responseJSON = {};
 
-    if (req.query.q) {
+    if (req.query.name || req.query.location || req.query.category) {
           // mysql model instance
       var mySqlModel = new MySQL();
 
       if ( config.mysqlConnection ) {
-        var columns = ['name', 'mainCategory', 'subCategory'];
-        var start = req.query.start || 0; 
-        var queryString = mySqlModel.perpareSearchQuery('business', columns, start, req.query.q);
-
-        // execute query
-        mySqlModel.executeQuery( config.mysqlConnection, queryString, function searchCallback(err, result) {
-
-          if (err) { 
-            // sending response
-            Response.QUERY_EXECUTION_ERROR(res, responseJSON, err);
-            return;
-          }
-
-          // list of all business data
-          logger.info('Sending total '+ result.length +' business records');
-          responseJSON.status = MESSAGES.OK;
-          responseJSON.data = result; 
-          // response to request
-          res.jsonp(HTTP.OK, responseJSON);
         
-        });
+        var start = req.query.start || 0;
+        var name = req.query.name || '';
+        var location = req.query.location || '';
+        var category = req.query.category || '';
+        console.log(req.query);
+
+        if ( start == 0 ) {
+          // execute count query
+          var countQuery = mySqlModel.perpareSearchQuery(name, location, category, start, true);
+          // execute query
+          mySqlModel.executeQuery( config.mysqlConnection, countQuery, function countCallback(err, result) {
+
+            if (err) { 
+              // sending response
+              Response.QUERY_EXECUTION_ERROR(res, responseJSON, err);
+              return;
+            }
+            
+            // list of all business data
+            logger.info('Total business records = '+ result[0].total);
+            responseJSON.status = MESSAGES.OK;
+            responseJSON.total = result[0].total; 
+
+            var queryString = mySqlModel.perpareSearchQuery(name, location, category, start);
+            searchQuery(queryString);
+          });
+
+        } else {
+          var queryString = mySqlModel.perpareSearchQuery(name, location, category, start);
+          searchQuery(queryString);
+        }
+        
+        function searchQuery(queryString) {
+          // execute query
+          mySqlModel.executeQuery( config.mysqlConnection, queryString, function searchCallback(err, result) {
+
+            if (err) { 
+              // sending response
+              Response.QUERY_EXECUTION_ERROR(res, responseJSON, err);
+              return;
+            }
+            
+            // list of all business data
+            logger.info('Sending total '+ result.length +' business records');
+            responseJSON.status = MESSAGES.OK;
+            responseJSON.data = result; 
+            // response to request
+            res.jsonp(HTTP.OK, responseJSON);
+          
+          });
+        }
       
       } else {
         // sending response
@@ -187,7 +232,7 @@
     
     } else {
 
-      logger.info('Search query param q is missing');
+      logger.info('Search query param is missing');
       Response.QUERY_PARAM_MISSING_ERROR(res, responseJSON);
     }
 
