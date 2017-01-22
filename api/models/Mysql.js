@@ -74,6 +74,11 @@ MySQL.prototype.perpareSearchQuery = function(name, location, category, start, c
 
   query += columns + from + ' LEFT JOIN city as c ON c.code = b.cityCode ';
 
+  if ( category != '' ) {
+    query += ' LEFT JOIN business_categories as bc ' +
+             ' ON bc.business_code = b.id ';
+  }
+
   var where = ' WHERE ';
 
   // search on name field
@@ -81,10 +86,18 @@ MySQL.prototype.perpareSearchQuery = function(name, location, category, start, c
     where += "b.name REGEXP '" + name + "'";
   }
 
+  // CITY code
   if ( location !== '' ) {
 
     var and = (name == '') ? ' ' : ' AND '; 
     where += and + 'c.code = ' + location;
+  }
+
+  // Category Id
+  if ( category !== '' ) {
+
+    var and = (name == '' && location == '') ? ' ' : ' AND '; 
+    where += and + 'bc.category_code = ' + category;
   }
 
   query = query + where + ' LIMIT ' + start + ',' + 20 + ';';
