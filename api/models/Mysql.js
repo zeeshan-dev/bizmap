@@ -64,7 +64,7 @@ MySQL.prototype.perpareSelectQuery = function(table, columns, start, limit) {
 MySQL.prototype.perpareSearchQuery = function(name, location, category, start, count) {
  
   var query = ' SELECT ';
-  var columns = ' b.name, b.address, b.phone1, b.phone2, c.name as cityName ';
+  var columns = ' b.name, b.address, b.phone1, b.phone2, b.email1 as email, c.name as cityName,  ';
 
   if ( count ) {
     columns = ' COUNT(*) as total'
@@ -76,7 +76,7 @@ MySQL.prototype.perpareSearchQuery = function(name, location, category, start, c
 
   if ( category != '' ) {
     query += ' LEFT JOIN business_categories as bc ' +
-             ' ON bc.business_code = b.id ';
+             ' ON bc.business_code = b.code ';
   }
 
   var where = ' WHERE ';
