@@ -51,6 +51,9 @@ mysqlClient.connect(function(err){
 var businessController = require( __dirname + '/controllers/BusinessController' );
 businessController.setup( app );
 
+var userController = require( __dirname + '/controllers/UserController' );
+userController.setup( app );
+
 // Start the http server
 var httpServer;
 

@@ -1,0 +1,2 @@
+ALTER TABLE `bizmap`.`users` 
+ADD COLUMN `phone` VARCHAR(45) NULL DEFAULT NULL COMMENT '' AFTER `dateOfBirth`;
