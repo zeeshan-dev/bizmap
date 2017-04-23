@@ -117,9 +117,9 @@ MySQL.prototype.getFavouriteQuery = function(userId) {
 
   // find on userId
   where += "f.userId = " + userId;
-  query += " ORDER BY f.created_at DESC ";
-  
-  query = query + where + ';';
+  var orderBy = " ORDER BY f.created_at DESC ";
+
+  query = query + where + orderBy + ';';
   console.log(query);
   return query;
 };
