@@ -117,7 +117,8 @@ MySQL.prototype.getFavouriteQuery = function(userId) {
 
   // find on userId
   where += "f.userId = " + userId;
-
+  query += " ORDER BY f.created_at DESC ";
+  
   query = query + where + ';';
   console.log(query);
   return query;
