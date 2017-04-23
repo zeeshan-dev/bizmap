@@ -179,7 +179,7 @@ User.setup = function(app) {
             // mysql query execution error
             logger.info(JSON.stringify(error));
             responseJSON.status = MESSAGES.FAIL;
-            responseJSON.message =  MESSAGES.ERROR_QUERY_EXECUTION + ' error: '  + JSON.stringify(err);
+            responseJSON.message =  MESSAGES.ERROR_QUERY_EXECUTION + ' error: '  + JSON.stringify(error);
             // response to request
             res.jsonp(HTTP.INTERNAL_SERVER_ERROR, responseJSON);
             return;   
