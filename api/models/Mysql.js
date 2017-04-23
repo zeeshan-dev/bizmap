@@ -64,7 +64,7 @@ MySQL.prototype.perpareSelectQuery = function(table, columns, start, limit) {
 MySQL.prototype.perpareSearchQuery = function(name, location, category, start, count) {
  
   var query = ' SELECT ';
-  var columns = ' b.name, b.address, b.phone1, b.phone2, b.email1 as email, c.name as cityName, c.dialing_code ';
+  var columns = 'b.id, b.name, b.address, b.phone1, b.phone2, b.email1 as email, c.name as cityName, c.dialing_code ';
 
   if ( count ) {
     columns = ' COUNT(*) as total'
@@ -101,6 +101,24 @@ MySQL.prototype.perpareSearchQuery = function(name, location, category, start, c
   }
 
   query = query + where + ' LIMIT ' + start + ',' + 20 + ';';
+  console.log(query);
+  return query;
+};
+
+MySQL.prototype.getFavouriteQuery = function(userId) {
+ 
+  var query = ' SELECT ';
+  query += 'b.id, b.name, b.address, b.phone1, b.phone2, b.email1 as email, c.name as cityName, c.dialing_code ';
+  query += ' FROM business as b ';
+  query += ' LEFT JOIN favourites as f ON f.businessId = b.id';
+  query += ' LEFT JOIN city as c ON c.code = b.cityCode ';
+
+  var where = ' WHERE ';
+
+  // find on userId
+  where += "f.userId = " + userId;
+
+  query = query + where + ';';
   console.log(query);
   return query;
 };

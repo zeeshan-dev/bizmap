@@ -6,6 +6,9 @@ module.exports = Object.freeze({
 	INVALID_POST: 'Post fields are missing.',
 	BUSINESS_ADDED_SUCCESSFULLY:'Business added successfully.',
 	USER_ADDED_SUCCESSFULLY:'User added successfully.',
+	USER_LOGIN_SUCCESSFULLY:'User login successfully.',
+	INVALID_LOGIN:'Invalid email or password.',
+	FAVOURITE_ADDED_SUCCESSFULLY:'Business added to favourite list successfully.',
 	PARAM_MISSING:'Query parameter missing',
 	FAIL:'FAIL',
 	OK:'OK'
