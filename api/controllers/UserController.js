@@ -171,7 +171,7 @@ User.setup = function(app) {
       if ( config.mysqlConnection ) {
 
         var favQuery = mySqlModel.getFavouriteQuery(req.query.userId);
-        
+
         var userModel = new User();
         userModel.getFavouritesList(mySqlModel, favQuery, function favCallback(error, favList) {
 
@@ -186,7 +186,7 @@ User.setup = function(app) {
           }
           
           responseJSON.status = MESSAGES.OK;
-          responseJSON.data = favList[0];            
+          responseJSON.data = favList || [];          
           // response to request
           res.jsonp(HTTP.OK, responseJSON);
           return;
