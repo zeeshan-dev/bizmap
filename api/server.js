@@ -52,7 +52,7 @@ var businessController = require( __dirname + '/controllers/BusinessController' 
 businessController.setup( app );
 
 var userController = require( __dirname + '/controllers/UserController' );
-userController.setup( app );
+userController.setup( app, mysql );
 
 // Start the http server
 var httpServer;

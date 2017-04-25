@@ -11,7 +11,7 @@ User = module.exports = {};
  * sent to the browser.
  */
 
-User.setup = function(app) {
+User.setup = function(app, mysql) {
 
   // Our logger for logging to file and console
   var logger = require(__dirname + '/../logger');
@@ -23,6 +23,7 @@ User.setup = function(app) {
   var MySQL = require(__dirname + '/../models/Mysql');
   var Response = require(__dirname + '/../models/Response');
   var User = require(__dirname + '/../models/User');
+  var Email = require(__dirname + '/../models/Email');
   var fs = require('fs');
 
   // add business api
@@ -113,39 +114,19 @@ User.setup = function(app) {
     var post = req.body;
     var data = {};
     var responseJSON = {};
-    console.log(post);
+
     // check if post is valid
     if ( post && Object.keys(post).length > 0 ) {
 
-      // mysql model instance
-      var mySqlModel = new MySQL();
-    
-      // prepare insert query
-      var queryString = mySqlModel.perpareInsertQuery('favourites', post);
-
+     
       // check db connection
       if ( config.mysqlConnection ) {
-        // execute insert query
-        mySqlModel.executeQuery( config.mysqlConnection, queryString, function insertCallback(err, result) {
 
-          if (err) { 
-            // mysql query execution error
-            logger.info(JSON.stringify(err));
-            responseJSON.status = MESSAGES.FAIL;
-            responseJSON.message =  MESSAGES.ERROR_QUERY_EXECUTION + ' error: '  + JSON.stringify(err);
-            // response to request
-            res.jsonp(HTTP.INTERNAL_SERVER_ERROR, responseJSON);
-            return;
-          }
-          
-          // user added successfully
-          logger.info( MESSAGES.FAVOURITE_ADDED_SUCCESSFULLY );
-          responseJSON.status = MESSAGES.OK;
-          responseJSON.message =  MESSAGES.FAVOURITE_ADDED_SUCCESSFULLY;
-          // response to request
-          res.jsonp(HTTP.OK, responseJSON);
+         // mysql model instance
+        var mySqlModel = new MySQL();
+        var userModel = new User();
+        userModel.addRemoveFavourite(req, res, mySqlModel, post, responseJSON);
 
-        });
       } else {
         // sending response
         Response.CONNECTION_ERROR(res, responseJSON);
@@ -165,11 +146,11 @@ User.setup = function(app) {
     var responseJSON = {};
 
     if ( req.query.userId ) {
-      // mysql model instance
-      var mySqlModel = new MySQL();
-
+     
       if ( config.mysqlConnection ) {
 
+         // mysql model instance
+        var mySqlModel = new MySQL();
         var favQuery = mySqlModel.getFavouriteQuery(req.query.userId);
 
         var userModel = new User();
@@ -252,6 +233,11 @@ User.setup = function(app) {
       responseJSON.error = STRINGS.INVALID_POST
       res.status(HTTP.BAD_REQUEST).jsonp(responseJSON);
     }
+  });
+
+  app.get('/api/user/email', function(req, res) {
+
+    Email.sendEmail(req, res, {to: 'mail.mzeeshan@gmail.com', subject:'YP',body:'Hi form YP'});
   });
 
 }
