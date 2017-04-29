@@ -235,6 +235,39 @@ User.setup = function(app, mysql) {
     }
   });
 
+  // forgot-password api
+  app.post('/api/user/forgot-password', function(req, res) {
+
+    logger.info('Inside POST /api/user/forgot-password');
+
+    var post = req.body;
+    var data = {};
+    var responseJSON = {};
+
+    // check if post is valid
+    if ( post && Object.keys(post).length > 0 ) {
+
+     
+      // check db connection
+      if ( config.mysqlConnection ) {
+
+         // mysql model instance
+        var mySqlModel = new MySQL();
+        var userModel = new User();
+        userModel.forgotPasswordRequest(req, res, mySqlModel, post, responseJSON);
+
+      } else {
+        // sending response
+        Response.CONNECTION_ERROR(res, responseJSON);
+      }
+   
+    } else {
+      // sending response
+      Response.INVALID_POST(res, responseJSON);
+    }
+
+  });
+
   app.get('/api/user/email', function(req, res) {
 
     Email.sendEmail(req, res, {to: 'mail.mzeeshan@gmail.com', subject:'YP',body:'Hi form YP'});

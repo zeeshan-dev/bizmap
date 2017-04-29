@@ -106,6 +106,61 @@ User.prototype.addRemoveFavourite = function addRemoveFavourite ( req, res, mySq
     }
     
   });
+
+};
+
+/**
+* @memberof User
+* @function forgotPasswordRequest
+* @description add forgot password request
+*
+* @param where contition object
+* @param callback funtion
+* @returns callback
+**/
+User.prototype.forgotPasswordRequest = function forgotPasswordRequest ( req, res, mySqlModel, post, responseJSON) {
+
+  var emailQuery = "Select * from users where email = '" + post.email + "' LIMIT 1";
+
+  mySqlModel.executeQuery(config.mysqlConnection, emailQuery, function userCallback(err, result) {
+
+    if ( result && result.length ) {
+
+      var sql = "UPDATE ?? SET forgotPassword = ? WHERE email = ? ";
+      var updateThis = ['users', 1 , post.email];
+      sql = config.mysqlConnection.format(sql, updateThis);
+      logger.info('Forgot password query: ', sql);
+      mySqlModel.executeQuery(config.mysqlConnection, sql, function updateCallback(err, results) {
+
+        if (err) { 
+          logger.info(JSON.stringify(err));
+        }
+
+        logger.info('Updated count: ' + results.affectedRows);
+      
+        if ( results.affectedRows == 0 ) {
+
+        } else {
+
+           // business added to fav successfully
+          responseJSON.status = MESSAGES.OK;
+          responseJSON.message =  MESSAGES.OK;
+          // response to request
+          res.jsonp(HTTP.OK, responseJSON);
+        }
+        
+      });
+
+    } else {
+
+      responseJSON.status = MESSAGES.FAIL;
+      responseJSON.message =  MESSAGES.EMAIL_NOT_EXIST;
+      // response to request
+      res.jsonp(HTTP.INTERNAL_SERVER_ERROR, responseJSON);
+      return;
+    }
+
+  });
  
  };
 

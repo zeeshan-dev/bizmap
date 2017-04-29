@@ -8,6 +8,7 @@ module.exports = Object.freeze({
 	USER_ADDED_SUCCESSFULLY:'User added successfully.',
 	USER_LOGIN_SUCCESSFULLY:'User login successfully.',
 	INVALID_LOGIN:'Invalid email or password.',
+	EMAIL_NOT_EXIST:'Email does not exist.',
 	FAVOURITE_ADDED_SUCCESSFULLY:'Added to favourite.',
 	FAVOURITE_REMOVED:'Removed from favourite.',
 	PARAM_MISSING:'Query parameter missing',
