@@ -179,7 +179,7 @@
         var category = req.query.category || '';
         console.log(req.query);
 
-        if ( start == 0 ) {
+/*        if ( start == 0 ) {
           // execute count query
           var countQuery = mySqlModel.perpareSearchQuery(name, location, category, start, true);
           // execute query
@@ -203,7 +203,9 @@
         } else {
           var queryString = mySqlModel.perpareSearchQuery(name, location, category, start);
           searchQuery(queryString);
-        }
+        }*/
+        var queryString = mySqlModel.perpareSearchQuery(name, location, category, start);
+        searchQuery(queryString);
         
         function searchQuery(queryString) {
           // execute query

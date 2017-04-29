@@ -100,7 +100,7 @@ MySQL.prototype.perpareSearchQuery = function(name, location, category, start, c
     where += and + 'bc.category_code = ' + category;
   }
 
-  query = query + where + ' LIMIT ' + start + ',' + 20 + ';';
+  query = query + where;// + ' LIMIT ' + start + ',' + 20 + ';';
   console.log(query);
   return query;
 };
