@@ -164,4 +164,59 @@ User.prototype.forgotPasswordRequest = function forgotPasswordRequest ( req, res
  
  };
 
+/**
+* @memberof User
+* @function getBusinessCode
+* @description get latest business code
+*
+* @param where contition object
+* @param callback funtion
+* @returns callback
+**/
+User.prototype.getBusinessCode = function getBusinessCode ( mySqlModel, callback) {
+
+  var queryString = "SELECT code FROM bizmap.business ORDER BY code DESC LIMIT 0, 1";
+  mySqlModel.executeQuery(config.mysqlConnection, queryString, function businessCodeCallback(err, result){
+
+    if (err) { 
+      callback(STRINGS.ERROR_QUERY_EXECUTION, 0);
+      return;
+    }
+    
+    if ( result && result.length ) {
+      var code = Number(result[0].code) +1;
+      callback(null, code);
+      return;
+    } else {
+
+      callback(null, 0);
+    }
+  });
+}
+
+  /**
+* @memberof User
+* @function addBusinessCode
+* @description add latest business code
+*
+* @param where contition object
+* @param callback funtion
+* @returns callback
+**/
+User.prototype.addBusinessCode = function addBusinessCode ( mySqlModel, queryString) {
+
+  mySqlModel.executeQuery(config.mysqlConnection, queryString, function businessCodeCallback(err, result){
+
+    if (err) { 
+      logger.info(JSON.stringify(err));
+      return;
+    }
+    
+    logger.info('Updated count: ' + result.affectedRows);
+    
+  });
+ 
+};
+ 
+
 module.exports = User;

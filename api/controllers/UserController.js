@@ -229,9 +229,7 @@ User.setup = function(app, mysql) {
 
     } else {
 
-      responseJSON.status = STRINGS.FAIL;
-      responseJSON.error = STRINGS.INVALID_POST
-      res.status(HTTP.BAD_REQUEST).jsonp(responseJSON);
+      Response.INVALID_POST(res, responseJSON);
     }
   });
 
@@ -268,9 +266,75 @@ User.setup = function(app, mysql) {
 
   });
 
-  app.get('/api/user/email', function(req, res) {
+  app.post('/api/user/business/add', function(req, res) {
+    
+    
+    var post = req.body;
+    var responseJSON = {};
 
-    Email.sendEmail(req, res, {to: 'mail.mzeeshan@gmail.com', subject:'YP',body:'Hi form YP'});
+    // check if post is valid
+    if ( post && Object.keys(post).length > 0 ) {
+     
+      // check db connection
+      if ( config.mysqlConnection ) {
+
+         // mysql model instance
+        var mySqlModel = new MySQL();
+        var userModel = new User();
+        userModel.getBusinessCode( mySqlModel, function(err, code) {
+          
+          if (err) { 
+            // sending response
+            Response.QUERY_EXECUTION_ERROR(res, responseJSON, err);
+            return;
+          }
+
+          post.code = code;
+          var categoryId =  post.category;
+          delete post.category;
+
+          // prepare insert query
+          var queryString = mySqlModel.perpareInsertQuery('business', post);
+          logger.info(queryString);
+          // execute insert query
+          mySqlModel.executeQuery( config.mysqlConnection, queryString, function insertBusinessCallback(err, result) {
+
+            if (err) { 
+              // mysql query execution error
+              Response.QUERY_EXECUTION_ERROR(res, responseJSON, err);
+              return;
+            }
+            
+            var businessId = result.insertId;
+            
+            // business added successfully
+            logger.info( MESSAGES.BUSINESS_ADDED_SUCCESSFULLY , businessId);
+            responseJSON.status = MESSAGES.OK;
+            responseJSON.message =  MESSAGES.BUSINESS_ADDED_SUCCESSFULLY;
+            // response to request
+            res.jsonp(HTTP.OK, responseJSON);
+            
+            var data = {category_code: categoryId, business_code: code};
+            // prepare insert query
+            var query = mySqlModel.perpareInsertQuery('business_categories', data);
+            logger.info(query);
+            userModel.addBusinessCode( mySqlModel, query);
+
+          });
+        
+        });
+
+      } else {
+        // sending response
+        Response.CONNECTION_ERROR(res, responseJSON);
+      }
+   
+    } else {
+      // sending response
+      Response.INVALID_POST(res, responseJSON);
+    }
+
+    //Email.sendEmail(req, res, {to: 'mail.mzeeshan@gmail.com', subject:'YP',body:'Hi form YP'});
   });
 
 }
