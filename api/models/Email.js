@@ -6,7 +6,7 @@
 // Setup the module
 email = module.exports = {};
 
-email.sendEmail = function( req, res, data ) {
+email.sendEmail = function( data ) {
 
   // Get the configurations data
   var config = require(__dirname + '/../config');
@@ -22,10 +22,10 @@ email.sendEmail = function( req, res, data ) {
 
   // create reusable transport method (opens pool of SMTP connections)
   var smtpTransport = nodemailer.createTransport("SMTP",{
-      service: "Gmail", 
+      service: config.smtp.service, 
       auth: {
-          user: 'cpecyp@gmail.com',
-          pass: 'BizmaP123'
+          user: config.smtp.user,
+          pass: config.smtp.password
       }
   });   
 
@@ -36,16 +36,11 @@ email.sendEmail = function( req, res, data ) {
 
         if ( error ) {
 
-            logger.info(error);
-        //send email
-        responseJSON.message = 'Email sent error!';
-        responseJSON.error = error;
-        responseJSON.status = 'FAIL';
-        res.jsonp( 200, responseJSON);
-
+          logger.info('error',error);
+    
         } else {
           //send email 
-            logger.info('Email sent successfully to ' + data.to);
+          logger.info('Email sent successfully to ' + data.to);
         }
 
         // if you don't want to use this transport object anymore, uncomment following line
@@ -53,11 +48,6 @@ email.sendEmail = function( req, res, data ) {
     });
 
   } catch( e ) {
-
-    //send email 
-    responseJSON.message = 'Exception in sent email!';
-    responseJSON.error = e;
-    responseJSON.status = 'FAIL';
-    res.jsonp( 200, responseJSON);
+    logger.info('exception', e);
   }
 };

@@ -39,6 +39,14 @@ config.mysql.port		= "3306";
 config.mysql.database	= "bizmap";
 config.mysqlConnection = false;
 
+config.smtp = {};
+config.smtp.service = 'Gmail';
+config.smtp.user = 'cpecyp@gmail.com';
+config.smtp.password = 'BizmaP123';
+
+config.email = {};
+config.email.to = 'mail.mzeeshan@gmail.com, mmoeenghauri@yahoo.com;
+
 
 config.uploads = {}
 config.uploads.path = (config.app.mode.current == config.app.mode.DEVELOPMENT ) ? '/var/www/bizmap-data/' : '/var/www/bizmap-data/';

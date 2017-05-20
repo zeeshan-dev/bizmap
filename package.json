@@ -17,7 +17,8 @@
     "uglify-js": "2.4.0",
     "uglifycss": "0.0.7",
     "underscore": "1.5.2",
-    "winston": "0.7.2"
+    "winston": "0.7.2",
+    "ejs": "2.4.2"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

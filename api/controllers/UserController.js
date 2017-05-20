@@ -195,7 +195,7 @@ User.setup = function(app, mysql) {
 
       var mySqlModel = new MySQL();
 
-      var queryString = "Select id, email from users where email = '" + post.email + "' AND password = '" + post.password + "'";
+      var queryString = "Select id, name, email, phone from users where email = '" + post.email + "' AND password = '" + post.password + "'";
       mySqlModel.executeQuery(config.mysqlConnection, queryString, function duplicateCallback(err, result){
   
         if (err) { 
@@ -258,6 +258,57 @@ User.setup = function(app, mysql) {
         // sending response
         Response.CONNECTION_ERROR(res, responseJSON);
       }
+   
+    } else {
+      // sending response
+      Response.INVALID_POST(res, responseJSON);
+    }
+
+  });
+
+   // forgot-password api
+  app.post('/api/user/contact-business', function(req, res) {
+
+    logger.info('Inside POST /api/user/contact-business');
+
+    var post = req.body;
+    var data = {};
+    var responseJSON = {};
+    var ejs = require( 'ejs' );
+
+    // check if post is valid
+    if ( post && Object.keys(post).length > 0 ) {
+
+      var data = {};
+            
+      // Prepare Data for Email
+      data.businessName = post.businessName;
+      data.userId = post.userId;
+      data.senderName = post.name.trim();
+      data.phone = post.phone.trim()
+      data.email = post.email.trim();
+      data.message = post.message.trim();
+      data.contactPerson = post.contactPerson.trim();
+      
+      ejs.renderFile( config.email.templatePath, data, {}, function ejsRenderCompleted( err, message ) {
+        var mailOptions = {
+          from:'Yellow Pages of Pakistan <' + config.smtp.user + '>',  // sender address
+          to: config.email.to,
+          replyTo:  data.email,
+          subject: MESSAGES.EMAIL_SUBJECT_BUSINESS_CONTACT, 
+          html: message
+        }
+
+        // Send the email
+        Email.sendEmail( mailOptions);
+      });
+
+      logger.info(MESSAGES.EMAIL_SUCCESS);
+      responseJSON.status = MESSAGES.OK;
+      responseJSON.message =  MESSAGES.EMAIL_SUCCESS;         
+      // response to request
+      res.jsonp(HTTP.OK, responseJSON);
+
    
     } else {
       // sending response
