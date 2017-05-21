@@ -47,6 +47,7 @@ config.smtp.password = 'BizmaP123';
 config.email = {};
 config.email.to = 'mail.mzeeshan@gmail.com, mmoeenghauri@yahoo.com;
 
+config.email.templatePath = __dirname + '/ejs/';
 
 config.uploads = {}
 config.uploads.path = (config.app.mode.current == config.app.mode.DEVELOPMENT ) ? '/var/www/bizmap-data/' : '/var/www/bizmap-data/';

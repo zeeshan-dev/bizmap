@@ -266,7 +266,7 @@ User.setup = function(app, mysql) {
 
   });
 
-   // forgot-password api
+   // contact-business api
   app.post('/api/user/contact-business', function(req, res) {
 
     logger.info('Inside POST /api/user/contact-business');
@@ -278,7 +278,7 @@ User.setup = function(app, mysql) {
 
     // check if post is valid
     if ( post && Object.keys(post).length > 0 ) {
-      console.log(post);
+
       var data = {};
             
       // Prepare Data for Email
@@ -291,12 +291,85 @@ User.setup = function(app, mysql) {
       data.businessEmail = post.businessEmail.trim();
       data.businessPhone = post.businessPhone.trim();
       
-      ejs.renderFile( config.email.templatePath, data, {}, function ejsRenderCompleted( err, message ) {
+      ejs.renderFile( config.email.templatePath + 'email.html', data, {}, function ejsRenderCompleted( err, message ) {
         var mailOptions = {
           from:'Yellow Pages of Pakistan <' + config.smtp.user + '>',  // sender address
           to: config.email.to,
           replyTo:  data.email,
           subject: MESSAGES.EMAIL_SUBJECT_BUSINESS_CONTACT, 
+          html: message
+        }
+
+        // Send the email
+        Email.sendEmail( mailOptions);
+      });
+
+      logger.info(MESSAGES.EMAIL_SUCCESS);
+      responseJSON.status = MESSAGES.OK;
+      responseJSON.message =  MESSAGES.EMAIL_SUCCESS;         
+      // response to request
+      res.jsonp(HTTP.OK, responseJSON);
+
+   
+    } else {
+      // sending response
+      Response.INVALID_POST(res, responseJSON);
+    }
+
+  });
+
+  // claim-business api
+  app.post('/api/user/claim-business', function(req, res) {
+
+    logger.info('Inside POST /api/user/claim-business');
+
+    var post = req.body;
+    var data = {};
+    var responseJSON = {};
+    var ejs = require( 'ejs' );
+
+    // check if post is valid
+    if ( post && Object.keys(post).length > 0 ) {
+      var data = {};
+      console.log(post);
+      // Prepare Data for Email
+      
+      data.userId = post.userId;
+      data.senderName = post.senderName.trim();
+      data.senderPhone = post.senderPhone.trim()
+      data.senderEmail = post.senderEmail.trim();
+
+      // current business info
+      data.businessId = post.currentInfo.id;
+      data.businessName = post.currentInfo.name;
+      data.businessAddress = post.currentInfo.address;
+      data.businessPhone = post.currentInfo.dialing_code + post.currentInfo.phone1;
+      data.businessEmail = post.currentInfo.email;
+      data.businessMobile = post.currentInfo.mbile;
+      data.businessWeb = post.currentInfo.web;
+      data.businessFax = post.currentInfo.fax;
+      data.businessContactPerson = post.currentInfo.contactPerson;
+      data.businessCity = post.currentInfo.cityName;
+      //data.businessDialingCode = post.currentInfo.dialing_code;
+      
+      // new business info
+      data.businessNameNew = post.name.trim();
+      data.businessAddressNew = post.address.trim();
+      data.businessCityNameNew = post.cityName.trim();
+      data.businessPhoneNew = post.phone1.trim();
+      data.businessEmailNew = post.email1.trim();
+      data.businessMobileNew = post.mobile;
+      data.businessWebNew = post.web.trim();
+      data.businessFaxNew = post.fax1;
+      data.businesscontactPersonNew = post.contactPerson.trim();
+    
+      
+      ejs.renderFile( config.email.templatePath + 'claim.html', data, {}, function ejsRenderCompleted( err, message ) {
+        var mailOptions = {
+          from:'Yellow Pages of Pakistan <' + config.smtp.user + '>',  // sender address
+          to: config.email.to,
+          replyTo:  data.email,
+          subject: MESSAGES.EMAIL_SUBJECT_BUSINESS_CLAIM, 
           html: message
         }
 

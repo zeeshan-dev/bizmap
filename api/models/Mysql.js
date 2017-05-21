@@ -64,7 +64,7 @@ MySQL.prototype.perpareSelectQuery = function(table, columns, start, limit) {
 MySQL.prototype.perpareSearchQuery = function(name, location, category, start, count) {
  
   var query = ' SELECT ';
-  var columns = 'b.id, b.name, b.address, b.phone1, b.phone2, b.email1 as email, c.name as cityName, c.dialing_code ';
+  var columns = 'b.id, b.name, b.address, b.phone1, b.phone2, b.email1 as email, b.fax1 as fax, b.web, b.mobile, b.contactPerson, b.cityCode, c.name as cityName, c.dialing_code ';
 
   if ( count ) {
     columns = ' COUNT(*) as total'

@@ -4,6 +4,7 @@ module.exports = Object.freeze({
 	ERROR_QUERY_EXECUTION: 'Unable to execute query',
 	ERROR_USER_ALREADY_EXISTS:'User already exists wit this email.',
 	EMAIL_SUBJECT_BUSINESS_CONTACT:'YPP Business Contact Request',
+	EMAIL_SUBJECT_BUSINESS_CLAIM:'YPP Business Claim Request',
 	EMAIL_SUCCESS:'Email sent successfully.',
 	INVALID_POST: 'Post fields are missing.',
 	BUSINESS_ADDED_SUCCESSFULLY:'Business added successfully.',
