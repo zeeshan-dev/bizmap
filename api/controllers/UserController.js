@@ -278,7 +278,7 @@ User.setup = function(app, mysql) {
 
     // check if post is valid
     if ( post && Object.keys(post).length > 0 ) {
-
+      console.log(post);
       var data = {};
             
       // Prepare Data for Email
@@ -288,7 +288,8 @@ User.setup = function(app, mysql) {
       data.phone = post.phone.trim()
       data.email = post.email.trim();
       data.message = post.message.trim();
-      data.contactPerson = post.contactPerson.trim();
+      data.businessEmail = post.businessEmail.trim();
+      data.businessPhone = post.businessPhone.trim();
       
       ejs.renderFile( config.email.templatePath, data, {}, function ejsRenderCompleted( err, message ) {
         var mailOptions = {
