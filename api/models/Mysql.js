@@ -99,7 +99,9 @@ MySQL.prototype.perpareSearchQuery = function(name, location, category, start, c
     var and = (name == '' && location == '') ? ' ' : ' AND '; 
     where += and + 'bc.category_code = ' + category;
   }
-
+  // business should be approved
+  where += ' AND b.approved = 1';
+  
   query = query + where;// + ' LIMIT ' + start + ',' + 20 + ';';
   console.log(query);
   return query;

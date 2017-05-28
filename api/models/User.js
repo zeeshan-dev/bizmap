@@ -118,18 +118,19 @@ User.prototype.addRemoveFavourite = function addRemoveFavourite ( req, res, mySq
 * @param callback funtion
 * @returns callback
 **/
-User.prototype.forgotPasswordRequest = function forgotPasswordRequest ( req, res, mySqlModel, post, responseJSON) {
+User.prototype.forgotPasswordRequest = function forgotPasswordRequest ( req, res, mySqlModel, Email, post, responseJSON) {
 
   var emailQuery = "Select * from users where email = '" + post.email + "' LIMIT 1";
 
   mySqlModel.executeQuery(config.mysqlConnection, emailQuery, function userCallback(err, result) {
 
     if ( result && result.length ) {
-
-      var sql = "UPDATE ?? SET forgotPassword = ? WHERE email = ? ";
-      var updateThis = ['users', 1 , post.email];
+      var password = Math.random().toString(36).slice(-8);
+      var sql = "UPDATE ?? SET password = ? WHERE email = ? ";
+      var updateThis = ['users', password , post.email];
       sql = config.mysqlConnection.format(sql, updateThis);
-      logger.info('Forgot password query: ', sql);
+      var userName = result[0]['name'];
+      logger.info('Forgot password query: ', sql, userName);
       mySqlModel.executeQuery(config.mysqlConnection, sql, function updateCallback(err, results) {
 
         if (err) { 
@@ -141,6 +142,22 @@ User.prototype.forgotPasswordRequest = function forgotPasswordRequest ( req, res
         if ( results.affectedRows == 0 ) {
 
         } else {
+
+          var ejs = require( 'ejs' );
+          var data = {
+            name: userName,
+            password: password
+          };
+          ejs.renderFile( config.email.templatePath + 'forgot-password.html', data, {}, function ejsRenderCompleted( err, message ) {
+          var mailOptions = {
+            from:'Yellow Pages of Pakistan <' + config.smtp.user + '>',  // sender address
+            to: post.email.trim(),
+            subject: MESSAGES.EMAIL_SUBJECT_NEW_PASSWORD, 
+            html: message
+          }
+          // Send the email
+          Email.sendEmail( mailOptions);
+      });
 
            // business added to fav successfully
           responseJSON.status = MESSAGES.OK;

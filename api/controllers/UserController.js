@@ -252,7 +252,7 @@ User.setup = function(app, mysql) {
          // mysql model instance
         var mySqlModel = new MySQL();
         var userModel = new User();
-        userModel.forgotPasswordRequest(req, res, mySqlModel, post, responseJSON);
+        userModel.forgotPasswordRequest(req, res, mySqlModel, Email, post, responseJSON);
 
       } else {
         // sending response
@@ -264,6 +264,8 @@ User.setup = function(app, mysql) {
       Response.INVALID_POST(res, responseJSON);
     }
 
+    // email template 
+    // https://reallygoodemails.com/transactional/expiration/your-free-trial-has-expired/
   });
 
    // contact-business api
