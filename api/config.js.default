@@ -38,6 +38,7 @@ config.mysql.host		= "localhost";
 config.mysql.port		= "3306";
 config.mysql.database	= "bizmap";
 config.mysqlConnection = false;
+config.debug = true;
 
 config.smtp = {};
 config.smtp.service = 'Gmail';
