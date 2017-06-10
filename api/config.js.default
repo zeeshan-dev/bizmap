@@ -37,8 +37,9 @@ config.mysql.password	= "root";
 config.mysql.host		= "localhost";
 config.mysql.port		= "3306";
 config.mysql.database	= "bizmap";
+config.mysql.debug = true;
 config.mysqlConnection = false;
-config.debug = true;
+
 
 config.smtp = {};
 config.smtp.service = 'Gmail';
