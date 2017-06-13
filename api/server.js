@@ -36,14 +36,14 @@ app.all('*', function(req, res, next) {
 /**
  * Connect to Mysql
  */
-var mysqlClient = mysql.createPool(config.mysql);
-mysqlClient.getConnection(function(err, connection){
+var mysqlClient = mysql.createConnection(config.mysql);
+mysqlClient.connect(function(err){
   if (err) {
    logger.info('Mysqlconnection error: '+err);
   } else {
   
     logger.info("Mysql connected succesfully.");
-    config.mysqlConnection = connection;
+    config.mysqlConnection = mysqlClient;
   }
 
 });
